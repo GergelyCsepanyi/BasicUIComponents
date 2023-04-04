@@ -1,5 +1,5 @@
 import React from 'react';
-import {ImageBackground} from 'react-native';
+import {ImageBackground, StyleSheet} from 'react-native';
 
 class BackgroundForm extends React.Component {
   image = {
@@ -7,8 +7,17 @@ class BackgroundForm extends React.Component {
   };
 
   render(): React.ReactNode {
-    return <ImageBackground source={this.image} />;
+    return (
+      <ImageBackground
+        source={this.image}
+        style={styles.backgroundImageStyle}
+      />
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  backgroundImageStyle: {flex: 1},
+});
 
 export default BackgroundForm;
