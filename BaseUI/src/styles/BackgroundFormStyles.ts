@@ -15,6 +15,11 @@ const BackgroundFormStyles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 50,
   },
+  profileHeaderText: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  profileImageContainer: {},
 });
 
 export default BackgroundFormStyles;

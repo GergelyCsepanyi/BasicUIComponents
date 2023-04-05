@@ -14,8 +14,9 @@ class CredentialTextInput extends React.Component<
         value={this.props.value}
         style={CredentialTextInputStyle.textInputStyle}
         placeholder={this.props.placeholder}
-        placeholderTextColor={'rgb(181, 182, 221)'}
+        placeholderTextColor={this.props.placeholderTextColor}
         secureTextEntry={this.props.secureTextEntry}
+        editable={this.props?.editable}
       />
     );
   }

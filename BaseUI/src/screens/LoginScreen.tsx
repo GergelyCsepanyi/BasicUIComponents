@@ -19,12 +19,14 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
       <BackgroundForm>
         <CredentialTextInput
           placeholder="Email"
+          placeholderTextColor="rgb(181, 182, 221)"
           value={this.state.email}
           onChangeText={email => this.setState({email})}
         />
         <Stack size={15} />
         <CredentialTextInput
           placeholder="Password"
+          placeholderTextColor="rgb(181, 182, 221)"
           secureTextEntry={true}
           value={this.state.password}
           onChangeText={password => this.setState({password})}
@@ -34,6 +36,8 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
           text="Forget password?"
           align="flex-start"
           color="rgb(64,80,164)"
+          textAlign="auto"
+          onPress={() => {}}
         />
         <Stack size={40} />
         <FilledButton
@@ -53,6 +57,8 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
           text="Don’t have an account?"
           align="center"
           color="rgb(181, 182, 221)"
+          onPress={() => {}}
+          textAlign="center"
         />
       </BackgroundForm>
     );
