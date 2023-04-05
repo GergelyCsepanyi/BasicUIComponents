@@ -1,23 +1,31 @@
 import React from 'react';
-import {ImageBackground, StyleSheet} from 'react-native';
+import {
+  ImageBackground,
+  KeyboardAvoidingView,
+  View,
+  Platform,
+} from 'react-native';
+//import CredentialTextInput from './CredentialTextInput';
+import backgroundImage from '../images/backgroundImage';
+import BackgroundFormStyles from '../styles/BackgroundFormStyles';
 
-class BackgroundForm extends React.Component {
-  image = {
-    uri: 'https://images.pexels.com/photos/586744/pexels-photo-586744.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-  };
-
+class BackgroundForm extends React.Component<{children: React.ReactNode}, {}> {
   render(): React.ReactNode {
     return (
-      <ImageBackground
-        source={this.image}
-        style={styles.backgroundImageStyle}
-      />
+      <>
+        <ImageBackground
+          source={backgroundImage}
+          style={BackgroundFormStyles.backgroundImageStyle}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+            <View style={BackgroundFormStyles.viewStyle}>
+              {this.props.children}
+            </View>
+          </KeyboardAvoidingView>
+        </ImageBackground>
+      </>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  backgroundImageStyle: {flex: 1},
-});
 
 export default BackgroundForm;
