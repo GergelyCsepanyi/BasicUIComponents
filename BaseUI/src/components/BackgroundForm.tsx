@@ -5,21 +5,11 @@ import {
   View,
   Platform,
 } from 'react-native';
-//import CredentialTextInput from './CredentialTextInput';
 import backgroundImage from '../images/backgroundImage';
+import BackgroundFormProps from '../interfaces/BackgroundFormProps';
 import BackgroundFormStyles from '../styles/BackgroundFormStyles';
-import TextButton from './TextButton';
 
-class BackgroundForm extends React.Component<
-  {
-    children: React.ReactNode;
-    profileImage?: React.ReactNode;
-    mainTitleElement?: React.ReactNode;
-    editMode?: boolean;
-    editButtonElement?: React.ReactNode;
-  },
-  {}
-> {
+class BackgroundForm extends React.Component<BackgroundFormProps, {}> {
   render(): React.ReactNode {
     return (
       <>
@@ -33,7 +23,7 @@ class BackgroundForm extends React.Component<
               this.props.editButtonElement}
           </View>
           <View style={BackgroundFormStyles.profileImageContainer}>
-            {this.props?.profileImage}
+            {this.props?.profileImageElement}
           </View>
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : undefined}>

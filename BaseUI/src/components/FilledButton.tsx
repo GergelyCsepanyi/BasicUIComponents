@@ -1,11 +1,9 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
+import FilledButtonProps from '../interfaces/FilledButtonProps';
 import FilledButtonStyles from '../styles/FilledButtonStyles';
 
-class FilledButton extends React.Component<
-  {title: string; onPress: () => void; disabled?: boolean},
-  {}
-> {
+class FilledButton extends React.Component<FilledButtonProps, {}> {
   render(): React.ReactNode {
     return (
       <TouchableOpacity

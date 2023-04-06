@@ -2,41 +2,83 @@ import React from 'react';
 import {Text} from 'react-native';
 import BackgroundForm from '../components/BackgroundForm';
 import CredentialTextInput from '../components/CredentialTextInput';
+import EditButton from '../components/EditButton';
 import FilledButton from '../components/FilledButton';
 import ProfileImage from '../components/ProfileImage';
-import TextButton from '../components/TextButton';
 import ProfileScreenState from '../interfaces/ProfileScreenState';
 import ProfileScreenStyles from '../styles/ProfileScreenStyles';
+import * as ImagePicker from 'react-native-image-picker';
 
 class ProfileScreen extends React.Component<{}, ProfileScreenState> {
   state = {
     email: 'Test User',
     username: 'test@test.test',
+    imageBase64: require('../images/profileImagePlaceholderBase64.json').base64,
     editMode: false,
   };
 
   render(): React.ReactNode {
     const toggleEditMode = (editMode: boolean) => {
+      console.log('toggle');
       this.setState({editMode: !editMode});
     };
+
+    const pickImageAndStoreBase64Props = async (): Promise<void> => {
+      try {
+        const result = await ImagePicker.launchImageLibrary({
+          mediaType: 'photo',
+          includeBase64: true,
+          selectionLimit: 1,
+        });
+
+        if (result.didCancel) {
+          return;
+          // throw new Error('The image selection was cancelled.');
+        }
+
+        // This is only an issue on IPhone simulators (https://github.com/react-native-image-picker/react-native-image-picker/issues/2054)
+        if (!result.assets[0].base64) {
+          throw new Error('There is no base64.');
+        }
+
+        this.setState({imageBase64: result.assets[0].base64});
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const profileImageElement = () => {
+      return (
+        <ProfileImage
+          disabled={!this.state.editMode}
+          editMode={this.state.editMode}
+          onPress={pickImageAndStoreBase64Props}
+          imageBase64={this.state.imageBase64}
+        />
+      );
+    };
+
+    const editButtonElement = () => {
+      return (
+        <EditButton
+          text={'Edit'}
+          color="white"
+          align="center"
+          textAlign="center"
+          onPress={() => toggleEditMode(this.state.editMode)}
+          editMode={this.state.editMode}
+        />
+      );
+    };
+
     return (
       <>
         <BackgroundForm
-          profileImage={<ProfileImage />}
           mainTitleElement={
             <Text style={ProfileScreenStyles.profileTextStyle}>My profile</Text>
           }
-          editButtonElement={
-            <TextButton
-              text={'Edit'}
-              color="white"
-              align="center"
-              textAlign="center"
-              onPress={editMode => toggleEditMode(editMode)}
-              //   onPress={() => console.log('press')}
-              editMode={this.state.editMode}
-            />
-          }>
+          profileImageElement={profileImageElement()}
+          editButtonElement={editButtonElement()}>
           <CredentialTextInput
             placeholder="Email"
             placeholderTextColor="black"

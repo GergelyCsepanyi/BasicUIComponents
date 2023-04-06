@@ -1,18 +1,9 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
+import TextButtonProps from '../interfaces/TextButtonProps';
 import TextButtonStyles from '../styles/TextButtonStyles';
 
-class TextButton extends React.Component<
-  {
-    text: string;
-    color: string;
-    align: 'flex-start' | 'center';
-    textAlign?: 'center' | 'auto';
-    editMode?: boolean;
-    onPress?: ((text: boolean) => void) | (() => void);
-  },
-  {}
-> {
+class TextButton extends React.Component<TextButtonProps, {}> {
   render(): React.ReactNode {
     TextButtonStyles.textStyle.color = this.props.color;
     TextButtonStyles.textStyle.textAlign = this.props.textAlign;
