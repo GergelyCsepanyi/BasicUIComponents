@@ -1,14 +1,9 @@
 import React from 'react';
-import {Text, TextStyle, View, ViewStyle} from 'react-native';
+import {Text, View} from 'react-native';
+import SocialSectionElementProps from '../interfaces/SocialSectionElementProps';
 
 class SocialSectionElement extends React.Component<
-  {
-    numberText: number;
-    titleText: string;
-    containerStyle: ViewStyle;
-    numberTextStyle: TextStyle;
-    titleTextStyle: TextStyle;
-  },
+  SocialSectionElementProps,
   {}
 > {
   render(): React.ReactNode {

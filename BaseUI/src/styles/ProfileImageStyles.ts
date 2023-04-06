@@ -5,7 +5,8 @@ const ProfileImageStyles = StyleSheet.create({
     //color: 'rgb(181, 182, 221)',
     // borderWidth: 1,
     //borderColor: 'red',
-    borderRadius: 20,
+    //borderRadius: 20,
+    //borderWidth: 5,
   },
   touchableOpacityStyle: {
     width: 25,
@@ -15,8 +16,6 @@ const ProfileImageStyles = StyleSheet.create({
     width: 75,
     height: 75,
     // borderWidth: 1,
-
-    // borderColor: 'red',
   },
   cameraOnProfileImageStyle: {
     width: 25,

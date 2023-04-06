@@ -7,7 +7,9 @@ const BackgroundFormStyles = StyleSheet.create({
     //height: '50%',
   },
   viewStyle: {
+    //flex: 1,
     width: '100%',
+    height: '100%',
     //minHeight: '80%',
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
