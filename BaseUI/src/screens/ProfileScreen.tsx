@@ -8,13 +8,17 @@ import ProfileImage from '../components/ProfileImage';
 import ProfileScreenState from '../interfaces/ProfileScreenState';
 import ProfileScreenStyles from '../styles/ProfileScreenStyles';
 import * as ImagePicker from 'react-native-image-picker';
+import SocialSection from '../components/SocialSection';
+//import {Stack} from 'react-native-spacing-system';
 
 class ProfileScreen extends React.Component<{}, ProfileScreenState> {
   state = {
-    email: 'Test User',
-    username: 'test@test.test',
+    username: 'Test User',
+    email: 'test@test.test',
     imageBase64: require('../images/profileImagePlaceholderBase64.json').base64,
     editMode: false,
+    followers: 23,
+    following: 234,
   };
 
   render(): React.ReactNode {
@@ -79,12 +83,9 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           }
           profileImageElement={profileImageElement()}
           editButtonElement={editButtonElement()}>
-          <CredentialTextInput
-            placeholder="Email"
-            placeholderTextColor="black"
-            value={this.state.email}
-            onChangeText={email => this.setState({email})}
-            editable={this.state.editMode}
+          <SocialSection
+            followers={this.state.followers}
+            following={this.state.following}
           />
           <CredentialTextInput
             placeholder="Username"
@@ -93,16 +94,25 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
             onChangeText={username => this.setState({username})}
             editable={this.state.editMode}
           />
+          <CredentialTextInput
+            placeholder="Email"
+            placeholderTextColor="black"
+            value={this.state.email}
+            onChangeText={email => this.setState({email})}
+            editable={this.state.editMode}
+          />
           <FilledButton
             title={this.state.editMode ? 'Update profile' : 'Show state'}
-            disabled={!this.state.editMode}
+            //disabled={!this.state.editMode}
             onPress={
               this.state.editMode
                 ? () => {
                     toggleEditMode(this.state.editMode);
-                    console.log("'Sign in' button was pressed", this.state);
                   }
-                : () => {}
+                : () => {
+                    const {imageBase64, ...output} = this.state;
+                    console.log(output);
+                  }
             }
           />
         </BackgroundForm>

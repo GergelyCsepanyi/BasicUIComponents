@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 const ProfileScreenStyles = StyleSheet.create({
   profileTextStyle: {
     flex: 10,
+    //width: '100%',
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',

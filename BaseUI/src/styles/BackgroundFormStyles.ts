@@ -4,9 +4,11 @@ const BackgroundFormStyles = StyleSheet.create({
   backgroundImageStyle: {
     flex: 1,
     justifyContent: 'flex-end',
+    //height: '50%',
   },
   viewStyle: {
     width: '100%',
+    //minHeight: '80%',
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     alignItems: 'center',
