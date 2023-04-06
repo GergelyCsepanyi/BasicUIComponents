@@ -2,7 +2,7 @@ interface ProfileImageProps {
   editMode?: boolean;
   onPress?: () => void;
   disabled: boolean;
-  imageBase64: string;
+  image: {uri: string};
 }
 
 export default ProfileImageProps;

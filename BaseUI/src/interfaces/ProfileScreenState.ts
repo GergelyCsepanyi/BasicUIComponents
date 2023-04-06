@@ -1,7 +1,7 @@
 interface ProfileScreenState {
   username: string;
   email: string;
-  imageBase64: string;
+  image: {uri: string};
   editMode: boolean;
   followers: number;
   following: number;

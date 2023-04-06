@@ -13,9 +13,10 @@ class ProfileImage extends React.Component<ProfileImageProps, {}> {
           style={ProfileImageStyles.touchableOpacityStyle}>
           <ImageBackground
             source={{
-              uri: 'data:image/png;base64,' + this.props.imageBase64,
+              uri: this.props.image.uri,
             }}
-            style={ProfileImageStyles.profileImageStyle}>
+            style={ProfileImageStyles.profileImageStyle}
+            resizeMode={'cover'}>
             {this.props.editMode && (
               <View>
                 <Image

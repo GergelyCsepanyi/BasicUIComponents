@@ -15,7 +15,10 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
   state = {
     username: 'Test User',
     email: 'test@test.test',
-    imageBase64: require('../images/profileImagePlaceholderBase64.json').base64,
+    image: {
+      uri: 'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg',
+      // uri: require('../images/profileImagePlaceholder.jpg'),
+    },
     editMode: false,
     followers: 23,
     following: 234,
@@ -31,7 +34,6 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
       try {
         const result = await ImagePicker.launchImageLibrary({
           mediaType: 'photo',
-          includeBase64: true,
           selectionLimit: 1,
         });
 
@@ -40,12 +42,11 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           // throw new Error('The image selection was cancelled.');
         }
 
-        // This is only an issue on IPhone simulators (https://github.com/react-native-image-picker/react-native-image-picker/issues/2054)
-        if (!result.assets[0].base64) {
-          throw new Error('There is no base64.');
+        if (!result.assets[0].uri) {
+          throw new Error('Image not found!');
         }
 
-        this.setState({imageBase64: result.assets[0].base64});
+        this.setState({image: result.assets[0]});
       } catch (error) {
         console.log(error);
       }
@@ -57,7 +58,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           disabled={!this.state.editMode}
           editMode={this.state.editMode}
           onPress={pickImageAndStoreBase64Props}
-          imageBase64={this.state.imageBase64}
+          image={this.state.image}
         />
       );
     };
@@ -103,15 +104,13 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           />
           <FilledButton
             title={this.state.editMode ? 'Update profile' : 'Show state'}
-            //disabled={!this.state.editMode}
             onPress={
               this.state.editMode
                 ? () => {
                     toggleEditMode(this.state.editMode);
                   }
                 : () => {
-                    const {imageBase64, ...output} = this.state;
-                    console.log(output);
+                    console.log(this.state);
                   }
             }
           />
