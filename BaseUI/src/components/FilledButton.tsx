@@ -5,12 +5,20 @@ import FilledButtonStyles from '../styles/FilledButtonStyles';
 
 class FilledButton extends React.Component<FilledButtonProps, {}> {
   render(): React.ReactNode {
+    if (this.props.buttonColor) {
+      this.props.touchableOpacityStyle.backgroundColor = this.props.buttonColor;
+    }
+    if (this.props.textColor) {
+      console.log(this.props.textStyle);
+      this.props.textStyle.color = this.props.textColor;
+      this.props.textStyle.fontSize = 26;
+    }
     return (
       <TouchableOpacity
-        style={FilledButtonStyles.touchableOpacityStyle}
+        style={this.props.touchableOpacityStyle}
         onPress={this.props.onPress}
         disabled={this.props.disabled}>
-        <Text style={FilledButtonStyles.textStyle}>{this.props.title}</Text>
+        <Text style={this.props.textStyle}>{this.props.title}</Text>
       </TouchableOpacity>
     );
   }

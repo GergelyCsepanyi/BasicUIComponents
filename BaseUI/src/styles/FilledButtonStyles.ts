@@ -8,6 +8,7 @@ const FilledButtonStyles = StyleSheet.create({
     backgroundColor: 'rgb(64, 80, 164)',
     justifyContent: 'center',
     alignItems: 'center',
+    //marginTop: 222,
   },
 
   textStyle: {

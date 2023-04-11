@@ -16,7 +16,11 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
   };
   render() {
     return (
-      <BackgroundForm>
+      <BackgroundForm
+        imageBackgroundStyle={LoginScreenStyles.backgroundImageViewStyle}
+        backgroundFormChildrenContainerStyle={
+          LoginScreenStyles.backgroundFormChildrenContainer
+        }>
         <CredentialTextInput
           placeholder="Email"
           placeholderTextColor="rgb(181, 182, 221)"

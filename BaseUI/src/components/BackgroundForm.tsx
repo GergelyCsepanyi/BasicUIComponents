@@ -15,24 +15,34 @@ class BackgroundForm extends React.Component<BackgroundFormProps, {}> {
       <>
         <ImageBackground
           source={backgroundImage}
-          style={BackgroundFormStyles.backgroundImageStyle}>
-          {/* <View style={BackgroundFormStyles.profileHeaderText}> */}
-          {this.props?.mainTitleElement}
-          {this.props?.editButtonElement &&
-            !this.props?.editMode &&
-            this.props.editButtonElement}
-          {/* </View> */}
-          {/* <View style={BackgroundFormStyles.profileImageContainer}> */}
-          {this.props?.profileImageElement}
-          {/* </View> */}
+          style={this.props.imageBackgroundStyle}>
+          <View style={this.props.profileHeaderContainerStyle}>
+            {this.props?.mainTitleElement}
+            {this.props?.editButtonElement &&
+              !this.props?.editMode &&
+              this.props.editButtonElement}
+          </View>
+          <View style={BackgroundFormStyles.profileImageContainer}>
+            {this.props?.profileImageElement}
+          </View>
+          {/* <KeyboardAvoidingView style={{borderColor: 'yellow', borderWidth: 2}}> */}
           <KeyboardAvoidingView
-            style={{height: '80%', borderColor: 'yellow', borderWidth: 2}}>
-            <KeyboardAvoidingView
-              behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-              <View style={BackgroundFormStyles.viewStyle}>
-                {this.props.children}
-              </View>
-            </KeyboardAvoidingView>
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+            <View style={this.props.backgroundFormChildrenContainerStyle}>
+              {this.props.children}
+            </View>
+            {/* <View
+              style={{
+                borderWidth: 1,
+                borderColor: 'red',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                //marginTop: '20%',
+              }}>
+              <Text>asdf</Text>
+            </View> */}
+            {/* </KeyboardAvoidingView> */}
           </KeyboardAvoidingView>
         </ImageBackground>
       </>
