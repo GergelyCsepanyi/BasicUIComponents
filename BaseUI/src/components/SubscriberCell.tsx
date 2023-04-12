@@ -1,46 +1,67 @@
-import React, {useEffect} from 'react';
-import {View, Image, Text, ImageBackground} from 'react-native';
+import React from 'react';
+import {View, Image, Text} from 'react-native';
 import SubscriberCellProps from '../interfaces/SubscriberCellProps';
-import SubscriberCellStyle from '../styles/SubscriberCellStyle';
+//import SubscriberCellStyle from '../styles/SubscriberCellStyle';
 import FilledButton from './FilledButton';
+// import {CheckBox} from 'react-native-elements';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+// import {CheckBox} from '@rneui/base';
+import CheckBox from '@react-native-community/checkbox';
+
+// Icon.loadFont();
 
 const SubscriberCell = (props: SubscriberCellProps) => {
-  //   useEffect(() => {
-  //     if (props.subscriber.isFollowing) {
-  //       SubscriberCellStyle.touchableOpacityStyle.backgroundColor = 'red';
-  //       SubscriberCellStyle.buttonTextStyle.color = 'yellow';
-  //     } else {
-  //       SubscriberCellStyle.touchableOpacityStyle.backgroundColor =
-  //         'rgb(64, 80, 164)';
-  //       SubscriberCellStyle.buttonTextStyle.color = 'white';
-  //     }
-  //   }, [props.subscriber.isFollowing]);
-
+  //console.log(props.subscriber);
   return (
-    <View style={SubscriberCellStyle.subscriberCellContainerStyle}>
-      <View style={SubscriberCellStyle.imageStyle}>
+    <View style={props.styles.subscriberCellContainerStyle}>
+      <View style={props.styles.imageStyle}>
         <Image
           source={{
             uri: 'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg',
           }}
         />
       </View>
-      <View style={SubscriberCellStyle.subscriberTextsContainer}>
-        <Text style={SubscriberCellStyle.titleTextStyle}>
-          {props.subscriber.title}
-        </Text>
-        <Text style={SubscriberCellStyle.descriptionTextStyle}>
+      <View style={props.styles.subscriberTextsContainer}>
+        <Text style={props.styles.titleTextStyle}>{props.subscriber.name}</Text>
+        <Text style={props.styles.descriptionTextStyle}>
           {props.subscriber.description}
         </Text>
       </View>
-      <FilledButton
-        touchableOpacityStyle={SubscriberCellStyle.touchableOpacityStyle}
-        onPress={props.onPressFollowButton}
-        textStyle={SubscriberCellStyle.buttonTextStyle}
-        buttonColor={props.subscriber.isFollowing ? 'red' : 'yellow'}
-        textColor={props.subscriber.isFollowing ? 'black' : 'green'}
-        title={props.subscriber.isFollowing ? 'Following' : 'Follow'}
-      />
+
+      {props.renderButtonOrCheckbox === 'button' && (
+        <FilledButton
+          touchableOpacityStyle={[
+            props.styles.touchableOpacityStyle,
+            {
+              backgroundColor: props.subscriber.isFollowing
+                ? 'rgb(64, 80, 164)'
+                : 'rgba(190, 198, 255, 0.3)',
+            },
+          ]}
+          onPress={props.onPressFollowButton}
+          textStyle={[
+            props.styles.buttonTextStyle,
+            {
+              color: props.subscriber.isFollowing
+                ? 'white'
+                : 'rgb(77, 91, 177)',
+            },
+          ]}
+          title={props.subscriber.isFollowing ? 'Following' : 'Follow'}
+        />
+      )}
+
+      {props.renderButtonOrCheckbox === 'checkbox' && (
+        <View style={props.styles.checkboxContainerStyle}>
+          <CheckBox
+            style={props.styles.checkboxStyle}
+            disabled={false}
+            //checked={true}
+            //onPress={() => {}}
+            onValueChange={() => {}}
+          />
+        </View>
+      )}
     </View>
   );
 };

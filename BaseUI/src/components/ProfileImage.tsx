@@ -28,7 +28,7 @@ class ProfileImage extends React.Component<ProfileImageProps, {}> {
           </ImageBackground>
         </TouchableOpacity>
       </View>
-    );
+    ); // marginTop -20 -15 position absolute top -15
   }
 }
 

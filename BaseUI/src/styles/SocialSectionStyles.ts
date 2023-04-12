@@ -8,7 +8,7 @@ const SocialSectionStyles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'rgb(181, 182, 221)',
     borderRadius: 20,
-    marginTop: 42,
+    //marginTop: 42,
     //borderWidth: 1,
   },
   separatorStyle: {

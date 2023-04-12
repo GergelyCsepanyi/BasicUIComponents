@@ -3,19 +3,29 @@ import {StyleSheet} from 'react-native';
 const ProfileImageStyles = StyleSheet.create({
   viewStyle: {
     //color: 'rgb(181, 182, 221)',
-    // borderWidth: 1,
-    //borderColor: 'red',
+    borderWidth: 5,
+    borderColor: 'red',
     //borderRadius: 20,
     //borderWidth: 5,
+    //position: 'absolute',
+    // top: -51,
+    // left: -3,
+    marginBottom: 42,
+    marginTop: -80,
+    marginLeft: -340,
   },
   touchableOpacityStyle: {
     width: 25,
     borderRadius: 20,
+    borderWidth: 5,
+    borderColor: 'yellow',
   },
   profileImageStyle: {
     width: 75,
     height: 75,
-    // borderWidth: 1,
+    borderWidth: 2,
+    borderColor: 'blue',
+    borderRadius: 20,
   },
   cameraOnProfileImageStyle: {
     width: 25,

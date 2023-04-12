@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {FlatList, ListRenderItemInfo, Text} from 'react-native';
 import SubscriberItem from '../interfaces/SubscriberItem';
 import SubscriberScreenStyles from '../styles/SubscriberScreenStyles';
-import BackgroundForm from './BackgroundForm';
-import SubscriberCell from './SubscriberCell';
+import BackgroundForm from '../components/BackgroundForm';
+import SubscriberCell from '../components/SubscriberCell';
+import SubscriberCellStyle from '../styles/SubscriberCellStyle';
 
 const SubscribersScreen = () => {
   const [subscribers, setSubscribers] = useState<SubscriberItem[]>([
@@ -12,7 +13,7 @@ const SubscribersScreen = () => {
       image: {
         uri: 'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg',
       },
-      title: 'First user',
+      name: 'First user',
       description: 'Description...',
       isFollowing: true,
     },
@@ -21,7 +22,7 @@ const SubscribersScreen = () => {
       image: {
         uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
       },
-      title: 'Second user',
+      name: 'Second user',
       description: 'Description...',
       isFollowing: true,
     },
@@ -41,6 +42,8 @@ const SubscribersScreen = () => {
   const renderItem = (itemProps: ListRenderItemInfo<SubscriberItem>) => {
     return (
       <SubscriberCell
+        styles={SubscriberCellStyle}
+        renderButtonOrCheckbox="button"
         subscriber={itemProps.item}
         onPressFollowButton={() => {
           updateFollow(itemProps.item);

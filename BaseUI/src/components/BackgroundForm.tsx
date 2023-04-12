@@ -17,32 +17,25 @@ class BackgroundForm extends React.Component<BackgroundFormProps, {}> {
           source={backgroundImage}
           style={this.props.imageBackgroundStyle}>
           <View style={this.props.profileHeaderContainerStyle}>
+            {/* !this.props.editMode not working here because it can be undefined*/}
+            {this.props.editMode === false && <View style={{width: 23}} />}
             {this.props?.mainTitleElement}
             {this.props?.editButtonElement &&
               !this.props?.editMode &&
               this.props.editButtonElement}
           </View>
+          <View style={this.props.searchbarContainerStyle}>
+            {this.props?.searchbar}
+          </View>
           <View style={BackgroundFormStyles.profileImageContainer}>
             {this.props?.profileImageElement}
           </View>
-          {/* <KeyboardAvoidingView style={{borderColor: 'yellow', borderWidth: 2}}> */}
+
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
             <View style={this.props.backgroundFormChildrenContainerStyle}>
               {this.props.children}
             </View>
-            {/* <View
-              style={{
-                borderWidth: 1,
-                borderColor: 'red',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                //marginTop: '20%',
-              }}>
-              <Text>asdf</Text>
-            </View> */}
-            {/* </KeyboardAvoidingView> */}
           </KeyboardAvoidingView>
         </ImageBackground>
       </>

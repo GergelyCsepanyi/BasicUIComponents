@@ -45,6 +45,9 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
         />
         <Stack size={40} />
         <FilledButton
+          buttonColor="rgb(64, 80, 164)"
+          textStyle={LoginScreenStyles.buttonTextStyle}
+          touchableOpacityStyle={LoginScreenStyles.touchableOpacityStyle}
           title={'Sign In'}
           onPress={() =>
             console.log("'Sign in' button was pressed", this.state)

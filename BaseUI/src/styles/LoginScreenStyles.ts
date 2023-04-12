@@ -23,6 +23,16 @@ const LoginScreenStyles = StyleSheet.create({
     paddingVertical: 30,
     justifyContent: 'flex-end',
   },
+  touchableOpacityStyle: {
+    //flex: 1,
+    height: 45,
+    width: '100%',
+    borderRadius: 25,
+    backgroundColor: 'rgb(64, 80, 164)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonTextStyle: {fontSize: 15},
 });
 
 export default LoginScreenStyles;

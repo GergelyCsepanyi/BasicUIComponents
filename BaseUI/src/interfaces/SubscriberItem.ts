@@ -1,9 +1,11 @@
 import {ImageSourcePropType} from 'react-native/types';
 
-export default interface SubscriberItem {
+interface SubscriberItem {
   id: number;
   image?: ImageSourcePropType;
-  title: string;
+  name: string;
   description: string;
   isFollowing: boolean;
 }
+
+export default SubscriberItem;

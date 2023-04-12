@@ -1,5 +1,5 @@
 import React from 'react';
-import {KeyboardAvoidingView, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import BackgroundForm from '../components/BackgroundForm';
 import CredentialTextInput from '../components/CredentialTextInput';
 import EditButton from '../components/EditButton';
@@ -176,16 +176,16 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
       }
     };
 
-    const profileImageElement = () => {
-      return (
-        <ProfileImage
-          disabled={!this.state.editMode}
-          editMode={this.state.editMode}
-          onPress={pickImageAndStoreBase64Props}
-          image={this.state.image}
-        />
-      );
-    };
+    // const profileImageElement = () => {
+    //   return (
+    //     <ProfileImage
+    //       disabled={!this.state.editMode}
+    //       editMode={this.state.editMode}
+    //       onPress={pickImageAndStoreBase64Props}
+    //       image={this.state.image}
+    //     />
+    //   );
+    // };
 
     const editButtonElement = () => {
       return (
@@ -203,6 +203,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
     return (
       <>
         <BackgroundForm
+          editMode={this.state.editMode}
           mainTitleElement={
             <Text style={ProfileScreenStyles.profileTextStyle}>My profile</Text>
           }
@@ -213,8 +214,14 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           backgroundFormChildrenContainerStyle={
             ProfileScreenStyles.backgroundFormChildrenContainer
           }
-          profileImageElement={profileImageElement()}
+          //profileImageElement={profileImageElement()}
           editButtonElement={editButtonElement()}>
+          <ProfileImage
+            disabled={!this.state.editMode}
+            editMode={this.state.editMode}
+            onPress={pickImageAndStoreBase64Props}
+            image={this.state.image}
+          />
           {!this.state.editMode && (
             <SocialSection
               followers={this.state.followers}
@@ -238,18 +245,35 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           />
           {this.state.emailError && <Text>{this.state.emailError}</Text>}
 
-          <FilledButton
-            title={this.state.editMode ? 'Update profile' : 'Show state'}
-            onPress={
-              this.state.editMode
-                ? () => {
-                    handleUpdate();
-                  }
-                : () => {
-                    console.log(this.state);
-                  }
-            }
-          />
+          {/* button inside a container flex 1 justifyContent flex end */}
+          <View
+            style={{
+              //flex: 1,
+              //flexDirection: 'row',
+              justifyContent: 'flex-end',
+              borderWidth: 2,
+              borderColor: 'red',
+              //height: '60%',
+              width: '100%',
+              alignItems: 'flex-end',
+            }}>
+            <FilledButton
+              touchableOpacityStyle={ProfileScreenStyles.touchableOpacityStyle}
+              textStyle={ProfileScreenStyles.textStyle}
+              buttonColor="rgb(64, 80, 164)"
+              textColor="white"
+              title={this.state.editMode ? 'Update profile' : 'Show state'}
+              onPress={
+                this.state.editMode
+                  ? () => {
+                      handleUpdate();
+                    }
+                  : () => {
+                      console.log(this.state);
+                    }
+              }
+            />
+          </View>
         </BackgroundForm>
       </>
     );
