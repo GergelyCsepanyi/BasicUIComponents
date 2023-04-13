@@ -81,9 +81,27 @@ const AddPeopleScreen = () => {
   const [data, setData] = useState(dataFromAPI);
   const [search, setSearch] = useState(data);
 
+  const [searchInputValue, setSearchInputValue] = useState('');
+
   useEffect(() => {
     setSearch(data);
   }, [data]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearch(() => {
+        const filteredData = data.map(section => {
+          const filteredSectionData = section.data.filter(item =>
+            item.name.includes(searchInputValue),
+          );
+          return {...section, data: filteredSectionData};
+        });
+        return filteredData.filter(section => section.data.length > 0);
+      });
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [searchInputValue]);
 
   const updateView = (text: string) => {
     setSearch(() => {
@@ -102,9 +120,9 @@ const AddPeopleScreen = () => {
       searchbar={
         <SearchBar
           placeholder="Search..."
-          onChangeText={text => updateView(text)}
+          //onChangeText={text => updateView(text)} // This'll search immediately
+          onChangeText={setSearchInputValue} // This'll wait 2 sec before search
           value={search}
-          //style={AddPeopleScreenStyles.searchbarStyle}
           containerStyle={AddPeopleScreenStyles.searchbarContainerStyle}
           inputContainerStyle={
             AddPeopleScreenStyles.searchbarInputContainerStyle
