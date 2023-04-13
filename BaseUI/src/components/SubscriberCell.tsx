@@ -7,13 +7,40 @@ import FilledButton from './FilledButton';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 // import {CheckBox} from '@rneui/base';
 import CheckBox from '@react-native-community/checkbox';
+import {useSwipe} from '../hooks/useSwipe';
+import SubscriberItem from '../interfaces/SubscriberItem';
 
 // Icon.loadFont();
 
 const SubscriberCell = (props: SubscriberCellProps) => {
   //console.log(props.subscriber);
+  function onSwipeLeft() {
+    if (!props.setSubscribers) {
+      return;
+    }
+
+    props.setSubscribers(data => {
+      const filteredData = data.map(section => {
+        const filteredSectionData = section.data.filter(
+          item => item.id !== props.subscriber.id,
+        );
+        return {...section, data: filteredSectionData};
+      });
+      return filteredData.filter(section => section.data.length > 0);
+    });
+  }
+
+  function onSwipeRight() {
+    //console.log('SWIPE_RIGHT');
+  }
+
+  const {onTouchStart, onTouchEnd} = useSwipe(onSwipeLeft, onSwipeRight);
+
   return (
-    <View style={props.styles.subscriberCellContainerStyle}>
+    <View
+      style={props.styles.subscriberCellContainerStyle}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}>
       <View style={props.styles.imageStyle}>
         <Image
           source={{

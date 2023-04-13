@@ -1,9 +1,24 @@
-import {StyleProp, View} from 'react-native';
 import SubscriberItem from './SubscriberItem';
 
 export default interface SubscriberCellProps {
   styles: object;
   subscriber: SubscriberItem;
+  setSubscribers?: React.Dispatch<
+    React.SetStateAction<
+      {
+        title: string;
+        data: {
+          id: number;
+          image: {
+            uri: string;
+          };
+          name: string;
+          description: string;
+          isFollowing: boolean;
+        }[];
+      }[]
+    >
+  >;
   onPressFollowButton: () => void;
   renderButtonOrCheckbox: 'button' | 'checkbox';
 }

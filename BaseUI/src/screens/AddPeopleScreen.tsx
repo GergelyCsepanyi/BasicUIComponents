@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import {SafeAreaView, SectionList, Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SectionList, Text} from 'react-native';
 import BackgroundForm from '../components/BackgroundForm';
 import AddPeopleScreenStyles from '../styles/AddPeopleScreenStyles';
 import SubscriberCell from '../components/SubscriberCell';
 import {SearchBar} from '@rneui/base';
-import SubscriberItem from '../interfaces/SubscriberItem';
 
-const data = [
+const dataFromAPI = [
   {
     title: 'A',
     data: [
@@ -53,63 +52,51 @@ const data = [
       },
     ],
   },
+  {
+    title: 'C',
+    data: [
+      {
+        id: 91,
+        image: {
+          uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
+        },
+        name: 'C user',
+        description: 'Description...',
+        isFollowing: true,
+      },
+      {
+        id: 81,
+        image: {
+          uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
+        },
+        name: 'C user 2',
+        description: 'Description...',
+        isFollowing: true,
+      },
+    ],
+  },
 ];
 
 const AddPeopleScreen = () => {
+  const [data, setData] = useState(dataFromAPI);
   const [search, setSearch] = useState(data);
 
-  //   const updateView = (text: string) => {
-  //     console.log(
-  //       data.flatMap(group =>
-  //         group.data.filter(item => item.name.includes(text)),
-  //       ),
-  //     );
-  //     setSearch(() => {
-  //       return data.flatMap(group =>
-  //         group.data.filter(item => item.name.includes(text)),
-  //       );
-  //     });
-  //   };
-
-  /**
-   * [ { title, data: [] }, { title, data: [] } ]
-   *
-   *
-   *
-   */
+  useEffect(() => {
+    setSearch(data);
+  }, [data]);
 
   const updateView = (text: string) => {
     setSearch(() => {
-      let outerArray: typeof data = [];
-      let innerArray: SubscriberItem[] = [];
-      //let result = [];
-      //console.log('text:', text);
-      for (let i = 0; i < data.length; i++) {
-        for (let j = 0; j < data[i].data.length; j++) {
-          if (data[i].data[j].name.includes(text)) {
-            if (!outerArray.includes(data[i])) {
-              outerArray.push(data[i]);
-            }
-
-            innerArray.push(data[i].data[j]);
-          }
-          console.log('outer:', outerArray);
-          console.log('inner:', innerArray);
-        }
-        if (outerArray.length > 0 && outerArray.length < i) {
-          outerArray[i].data = innerArray;
-          //result.push();
-        }
-      }
-      console.log('finish');
-      //data.forEach(item => {});
-      //   for (let i = 0; i < outerArray.length; i++) {
-      //     outerArray[i].data = innerArray[i];
-      //   }
-      return outerArray;
-      //return data.filter(item => item.data[0].name.startsWith(text));
+      const filteredData = data.map(section => {
+        const filteredSectionData = section.data.filter(item =>
+          item.name.includes(text),
+        );
+        return {...section, data: filteredSectionData};
+      });
+      return filteredData.filter(section => section.data.length > 0);
     });
   };
+
   return (
     <BackgroundForm
       searchbar={
@@ -149,6 +136,7 @@ const AddPeopleScreen = () => {
             renderButtonOrCheckbox="checkbox"
             subscriber={item}
             onPressFollowButton={() => {}}
+            setSubscribers={setData}
           />
         )}
         renderSectionHeader={({section}) => (
