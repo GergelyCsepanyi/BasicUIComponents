@@ -151,7 +151,7 @@ const AddPeopleScreen = () => {
         renderItem={({item}) => (
           <SubscriberCell
             styles={AddPeopleScreenStyles.subscriberCellStyles}
-            renderButtonOrCheckbox="checkbox"
+            renderComponentType="checkbox"
             subscriber={item}
             onPressFollowButton={() => {}}
             setSubscribers={setData}

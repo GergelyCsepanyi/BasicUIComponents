@@ -4,10 +4,24 @@ import {
   KeyboardAvoidingView,
   View,
   Platform,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
-import backgroundImage from '../images/backgroundImage';
-import BackgroundFormProps from '../interfaces/BackgroundFormProps';
+import backgroundImage from '../theme/images/backgroundImage';
 import BackgroundFormStyles from '../styles/BackgroundFormStyles';
+
+interface BackgroundFormProps {
+  searchbar?: React.ReactNode;
+  children: React.ReactNode;
+  profileImageElement?: React.ReactNode;
+  mainTitleElement?: React.ReactNode;
+  editButtonElement?: React.ReactNode;
+  editMode?: boolean;
+  imageBackgroundStyle: StyleProp<ViewStyle>;
+  backgroundFormChildrenContainerStyle: StyleProp<ViewStyle>;
+  profileHeaderContainerStyle?: StyleProp<ViewStyle>;
+  searchbarContainerStyle?: StyleProp<ViewStyle>;
+}
 
 class BackgroundForm extends React.Component<BackgroundFormProps, {}> {
   render(): React.ReactNode {

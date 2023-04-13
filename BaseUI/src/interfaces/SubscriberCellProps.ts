@@ -20,7 +20,7 @@ export default interface SubscriberCellProps {
     >
   >;
   onPressFollowButton: () => void;
-  renderButtonOrCheckbox: 'button' | 'checkbox';
+  renderComponentType: 'button' | 'checkbox';
 }
 
 // subscriberCellContainerStyle: {

@@ -7,10 +7,10 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 class App extends React.Component {
   render(): React.ReactNode {
-    // return <LoginScreen />;
+    return <LoginScreen />;
     // return <ProfileScreen />;
     // return <SubscribersScreen />;
-    return <AddPeopleScreen />;
+    // return <AddPeopleScreen />;
     // return (
     //   <GestureHandlerRootView style={{flex: 1}}>
     //     <AddPeopleScreen />;

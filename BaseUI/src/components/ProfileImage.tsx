@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Image, TouchableOpacity, ImageBackground} from 'react-native';
 import ProfileImageProps from '../interfaces/ProfileImageProps';
 import ProfileImageStyles from '../styles/ProfileImageStyles';
+import Images from '../theme/images/Images';
 
 class ProfileImage extends React.Component<ProfileImageProps, {}> {
   render(): React.ReactNode {
@@ -21,7 +22,7 @@ class ProfileImage extends React.Component<ProfileImageProps, {}> {
             {this.props.editMode && (
               <View>
                 <Image
-                  source={require('../images/camera.jpeg')}
+                  source={Images.camera}
                   style={ProfileImageStyles.cameraOnProfileImageStyle}
                 />
               </View>

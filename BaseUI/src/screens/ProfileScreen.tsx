@@ -1,60 +1,21 @@
 import React from 'react';
-import {KeyboardAvoidingView, Text, View} from 'react-native';
+import {KeyboardAvoidingView, Text} from 'react-native';
 import BackgroundForm from '../components/BackgroundForm';
 import CredentialTextInput from '../components/CredentialTextInput';
-import EditButton from '../components/EditButton';
 import FilledButton from '../components/FilledButton';
 import ProfileImage from '../components/ProfileImage';
 import ProfileScreenState from '../interfaces/ProfileScreenState';
 import ProfileScreenStyles from '../styles/ProfileScreenStyles';
 import * as ImagePicker from 'react-native-image-picker';
 import SocialSection from '../components/SocialSection';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextButtonStyles from '../styles/TextButtonStyles';
 import {Stack} from 'react-native-spacing-system';
+import TextButton from '../components/TextButton';
+import Images from '../theme/images/Images';
+import StorageService from '../services/StorageService';
 
 class ProfileScreen extends React.Component<{}, ProfileScreenState> {
-  InitialProfilePicture =
-    'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg';
-
-  async storeData(key: string, value: string) {
-    try {
-      await AsyncStorage.setItem(key, value);
-    } catch (e) {}
-  }
-
-  async storeDataObj(key: string, value: object) {
-    try {
-      const valueAsString = JSON.stringify(value);
-      //console.log('valueAsString', valueAsString);
-      await AsyncStorage.setItem(key, valueAsString);
-    } catch (e) {}
-  }
-
-  async getData(key: string): Promise<string | null> {
-    try {
-      const value = await AsyncStorage.getItem(key);
-      return value;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  async getDataObj(key: string): Promise<string | null> {
-    try {
-      const valueAsString = await AsyncStorage.getItem(key);
-      return valueAsString !== null ? JSON.parse(valueAsString) : null;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  async clearStorage() {
-    try {
-      await AsyncStorage.clear();
-      console.log('The localstorage was cleared');
-    } catch (e) {}
-  }
+  //InitialProfilePicture = Images.profileImage;
 
   state = {
     username: '',
@@ -65,7 +26,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
     //   uri: this.InitialProfilePicture,
     //   //uri: require(this.InitialProfilePicture),
     // },
-    image: this.InitialProfilePicture,
+    image: Images.profileImage,
 
     editMode: false,
     followers: 23,
@@ -73,144 +34,115 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
   };
   componentDidMount() {
     let username = '';
-    this.getData('username').then(result => {
-      if (result === null) {
-        username = 'InitialUsername';
-      } else {
-        username = result;
-      }
+    StorageService.getData('username').then(result => {
+      username = result || 'InitialUsername';
       this.setState({username});
     });
 
     let email = '';
-    this.getData('email').then(result => {
-      if (result === null) {
-        email = 'InitialEmail@test.test';
-      } else {
-        email = result;
-      }
+    StorageService.getData('email').then(result => {
+      email = result || 'InitialEmail@test.test';
       this.setState({email});
     });
 
     let image = {
-      uri: this.InitialProfilePicture,
+      //uri: Images.profileImage,
     };
-
-    this.getDataObj('image').then(result => {
-      if (result === null) {
-        image.uri = this.InitialProfilePicture;
-      } else {
-        image = result;
-      }
+    StorageService.getDataObj('image').then(result => {
+      image = result || Images.profileImage;
       this.setState({image});
-      console.log('image', image);
     });
 
-    //this.clearStorage();
+    //StorageService.clearStorage();
   }
 
-  render(): React.ReactNode {
-    const toggleEditMode = (editMode: boolean) => {
-      console.log('toggle');
-      this.setState({editMode: !editMode});
-    };
+  toggleEditMode = (editMode: boolean) => {
+    console.log('toggle');
+    this.setState({editMode: !editMode});
+  };
 
-    const handleUpdate = () => {
+  handleUpdate = () => {
+    this.setState({
+      usernameError: '',
+      emailError: '',
+    });
+
+    if (this.state.username === '') {
       this.setState({
-        usernameError: '',
-        emailError: '',
+        usernameError: 'Username should be at least 1 character',
+      });
+      return;
+    }
+
+    if (this.state.username.length > 20) {
+      this.setState({
+        usernameError: 'Username cant be more than 20 characters',
+      });
+      return;
+    }
+
+    if (!this.state.username.match(new RegExp(/^[a-zA-Z]{1,20}$/gm))) {
+      this.setState({
+        usernameError: 'Username can contain only Latin letters',
+      });
+      return;
+    }
+
+    if (
+      !this.state.email.match(new RegExp(/^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/))
+    ) {
+      this.setState({emailError: 'Invalid email pattern!'});
+      return;
+    }
+
+    StorageService.storeData('username', this.state.username);
+    StorageService.storeData('email', this.state.email);
+
+    this.toggleEditMode(this.state.editMode);
+  };
+
+  pickImageAndStoreBase64Props = async (): Promise<void> => {
+    try {
+      const result = await ImagePicker.launchImageLibrary({
+        mediaType: 'photo',
+        selectionLimit: 1,
       });
 
-      if (this.state.username === '') {
-        this.setState({
-          usernameError: 'Username should be at least 1 character',
-        });
+      if (result.didCancel) {
         return;
+        // throw new Error('The image selection was cancelled.');
       }
 
-      if (this.state.username.length > 20) {
-        this.setState({
-          usernameError: 'Username cant be more than 20 characters',
-        });
-        return;
+      if (!result.assets[0].uri) {
+        throw new Error('Image not found!');
       }
 
-      if (!this.state.username.match(new RegExp(/^[a-zA-Z]{1,20}$/gm))) {
-        this.setState({
-          usernameError: 'Username can contain only Latin letters',
-        });
-        return;
-      }
+      this.setState({image: result.assets[0]});
+      StorageService.storeDataObj('image', result.assets[0]);
+      console.log('result.assets[0]', result.assets[0]);
+    } catch (error) {
+      console.log('ERROR during image selection:', error);
+    }
+  };
 
-      if (
-        !this.state.email.match(new RegExp(/^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/))
-      ) {
-        this.setState({emailError: 'Invalid email pattern!'});
-        return;
-      }
+  editButtonElement = () => {
+    return (
+      <TextButton
+        touchableOpacityStyle={[
+          TextButtonStyles.touchableOpacityStyle,
+          {alignItems: 'center', paddingEnd: 5},
+        ]}
+        textStyle={[
+          TextButtonStyles.textStyle,
+          {color: 'white', textAlign: 'center'},
+        ]}
+        text={'Edit'}
+        onPress={() => this.toggleEditMode(this.state.editMode)}
+      />
+    );
+  };
 
-      this.storeData('username', this.state.username);
-      this.storeData('email', this.state.email);
-
-      toggleEditMode(this.state.editMode);
-    };
-
-    const pickImageAndStoreBase64Props = async (): Promise<void> => {
-      try {
-        const result = await ImagePicker.launchImageLibrary({
-          mediaType: 'photo',
-          selectionLimit: 1,
-        });
-
-        if (result.didCancel) {
-          return;
-          // throw new Error('The image selection was cancelled.');
-        }
-
-        if (!result.assets[0].uri) {
-          throw new Error('Image not found!');
-        }
-
-        this.setState({image: result.assets[0]});
-        this.storeDataObj('image', result.assets[0]);
-        console.log('result.assets[0]', result.assets[0]);
-      } catch (error) {
-        console.log('ERROR during image selection:', error);
-      }
-    };
-
-    // const profileImageElement = () => {
-    //   return (
-    //     <ProfileImage
-    //       disabled={!this.state.editMode}
-    //       editMode={this.state.editMode}
-    //       onPress={pickImageAndStoreBase64Props}
-    //       image={this.state.image}
-    //     />
-    //   );
-    // };
-
-    const editButtonElement = () => {
-      return (
-        <EditButton
-          touchableOpacityStyle={[
-            TextButtonStyles.touchableOpacityStyle,
-            {alignItems: 'center', paddingEnd: 5},
-          ]}
-          textStyle={[
-            TextButtonStyles.textStyle,
-            {color: 'white', textAlign: 'center'},
-          ]}
-          text={'Edit'}
-          //color="white"
-          //align="center"
-          //textAlign="center"
-          onPress={() => toggleEditMode(this.state.editMode)}
-          editMode={this.state.editMode}
-        />
-      );
-    };
-
+  render(): React.ReactNode {
     return (
       <>
         <BackgroundForm
@@ -225,12 +157,11 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           backgroundFormChildrenContainerStyle={
             ProfileScreenStyles.backgroundFormChildrenContainer
           }
-          //profileImageElement={profileImageElement()}
-          editButtonElement={editButtonElement()}>
+          editButtonElement={this.editButtonElement()}>
           <ProfileImage
             disabled={!this.state.editMode}
             editMode={this.state.editMode}
-            onPress={pickImageAndStoreBase64Props}
+            onPress={this.pickImageAndStoreBase64Props}
             image={this.state.image}
           />
           {!this.state.editMode && (
@@ -281,14 +212,10 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
               touchableOpacityStyle={ProfileScreenStyles.touchableOpacityStyle}
               textStyle={[ProfileScreenStyles.textStyle, {color: 'white'}]}
               title={this.state.editMode ? 'Update profile' : 'Show state'}
-              onPress={
+              onPress={() =>
                 this.state.editMode
-                  ? () => {
-                      handleUpdate();
-                    }
-                  : () => {
-                      console.log(this.state);
-                    }
+                  ? this.handleUpdate()
+                  : console.log(this.state)
               }
             />
           </KeyboardAvoidingView>

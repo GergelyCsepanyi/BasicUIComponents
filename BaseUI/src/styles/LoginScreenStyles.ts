@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../theme/Colors';
 
 const LoginScreenStyles = StyleSheet.create({
   textStyle: {
-    color: 'rgb(181, 182, 221)',
+    color: Colors.bluePurple,
   },
 
   backgroundImageViewStyle: {
@@ -28,7 +29,7 @@ const LoginScreenStyles = StyleSheet.create({
     height: 45,
     width: '100%',
     borderRadius: 25,
-    backgroundColor: 'rgb(64, 80, 164)',
+    backgroundColor: Colors.darkBlue,
     justifyContent: 'center',
     alignItems: 'center',
   },

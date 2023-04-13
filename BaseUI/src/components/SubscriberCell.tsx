@@ -56,7 +56,7 @@ const SubscriberCell = (props: SubscriberCellProps) => {
         </Text>
       </View>
 
-      {props.renderButtonOrCheckbox === 'button' && (
+      {props.renderComponentType === 'button' && (
         <FilledButton
           touchableOpacityStyle={[
             props.styles.touchableOpacityStyle,
@@ -79,7 +79,7 @@ const SubscriberCell = (props: SubscriberCellProps) => {
         />
       )}
 
-      {props.renderButtonOrCheckbox === 'checkbox' && (
+      {props.renderComponentType === 'checkbox' && (
         <View style={props.styles.checkboxContainerStyle}>
           <CheckBox
             style={props.styles.checkboxStyle}

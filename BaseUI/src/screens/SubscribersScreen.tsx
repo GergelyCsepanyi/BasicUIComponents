@@ -43,7 +43,7 @@ const SubscribersScreen = () => {
     return (
       <SubscriberCell
         styles={SubscriberCellStyle}
-        renderButtonOrCheckbox="button"
+        renderComponentType="button"
         subscriber={itemProps.item}
         onPressFollowButton={() => {
           updateFollow(itemProps.item);

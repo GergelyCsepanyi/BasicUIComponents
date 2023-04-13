@@ -3,18 +3,19 @@ import {View, Platform} from 'react-native';
 import SocialNetworkButton from './SocialNetworkButton';
 import SocialNetworkButtonFormStyles from '../styles/SocialNetworkButtonFormStyles';
 import {Queue} from 'react-native-spacing-system';
+import Images from '../theme/images/Images';
 
 class SocialNetworkButtonForm extends React.Component {
   render(): React.ReactNode {
     return (
       <View style={SocialNetworkButtonFormStyles.containerStyle}>
-        <SocialNetworkButton image={require('../images/facebookIcon.png')} />
+        <SocialNetworkButton image={Images.facebookIcon} />
         <Queue size={11} />
-        <SocialNetworkButton image={require('../images/googlePlusIcon.png')} />
+        <SocialNetworkButton image={Images.googlePlusIcon} />
         {Platform.OS === 'ios' && (
           <>
             <Queue size={11} />
-            <SocialNetworkButton image={require('../images/appleIcon.png')} />
+            <SocialNetworkButton image={Images.appleIcon} />
           </>
         )}
       </View>

@@ -8,6 +8,7 @@ import TextButton from '../components/TextButton';
 import LoginScreenStyles from '../styles/LoginScreenStyles';
 import {Stack} from 'react-native-spacing-system';
 import LoginScreenState from '../interfaces/LoginScreenState';
+import Colors from '../theme/Colors';
 
 class LoginScreen extends React.Component<{}, LoginScreenState> {
   state = {
@@ -23,14 +24,14 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
         }>
         <CredentialTextInput
           placeholder="Email"
-          placeholderTextColor="rgb(181, 182, 221)"
+          placeholderTextColor={Colors.bluePurple}
           value={this.state.email}
           onChangeText={email => this.setState({email})}
         />
         <Stack size={15} />
         <CredentialTextInput
           placeholder="Password"
-          placeholderTextColor="rgb(181, 182, 221)"
+          placeholderTextColor={Colors.bluePurple}
           secureTextEntry={true}
           value={this.state.password}
           onChangeText={password => this.setState({password})}
@@ -38,7 +39,7 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
         <Stack size={30} />
         <TextButton
           touchableOpacityStyle={{alignSelf: 'flex-start'}}
-          textStyle={{color: 'rgb(64,80,164)', textAlign: 'auto'}}
+          textStyle={{color: Colors.darkBlue, textAlign: 'auto'}}
           text="Forget password?"
           onPress={() => {}}
         />
@@ -60,7 +61,7 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
 
         <TextButton
           touchableOpacityStyle={{alignSelf: 'center'}}
-          textStyle={{color: 'rgb(181, 182, 221)', textAlign: 'center'}}
+          textStyle={{color: Colors.bluePurple, textAlign: 'center'}}
           text="Don’t have an account?"
           onPress={() => {}}
         />
