@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {KeyboardAvoidingView, Text, View} from 'react-native';
 import BackgroundForm from '../components/BackgroundForm';
 import CredentialTextInput from '../components/CredentialTextInput';
 import EditButton from '../components/EditButton';
@@ -10,7 +10,8 @@ import ProfileScreenStyles from '../styles/ProfileScreenStyles';
 import * as ImagePicker from 'react-native-image-picker';
 import SocialSection from '../components/SocialSection';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-//import {Stack} from 'react-native-spacing-system';
+import TextButtonStyles from '../styles/TextButtonStyles';
+import {Stack} from 'react-native-spacing-system';
 
 class ProfileScreen extends React.Component<{}, ProfileScreenState> {
   InitialProfilePicture =
@@ -60,10 +61,12 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
     email: '',
     usernameError: '',
     emailError: '',
-    image: {
-      uri: this.InitialProfilePicture,
-      // uri: require('../images/profileImagePlaceholder.jpg'),
-    },
+    // image: {
+    //   uri: this.InitialProfilePicture,
+    //   //uri: require(this.InitialProfilePicture),
+    // },
+    image: this.InitialProfilePicture,
+
     editMode: false,
     followers: 23,
     following: 234,
@@ -190,10 +193,18 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
     const editButtonElement = () => {
       return (
         <EditButton
+          touchableOpacityStyle={[
+            TextButtonStyles.touchableOpacityStyle,
+            {alignItems: 'center', paddingEnd: 5},
+          ]}
+          textStyle={[
+            TextButtonStyles.textStyle,
+            {color: 'white', textAlign: 'center'},
+          ]}
           text={'Edit'}
-          color="white"
-          align="center"
-          textAlign="center"
+          //color="white"
+          //align="center"
+          //textAlign="center"
           onPress={() => toggleEditMode(this.state.editMode)}
           editMode={this.state.editMode}
         />
@@ -223,10 +234,13 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
             image={this.state.image}
           />
           {!this.state.editMode && (
-            <SocialSection
-              followers={this.state.followers}
-              following={this.state.following}
-            />
+            <>
+              <SocialSection
+                followers={this.state.followers}
+                following={this.state.following}
+              />
+              <Stack size={33} />
+            </>
           )}
           <CredentialTextInput
             placeholder="Username"
@@ -235,7 +249,10 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
             onChangeText={username => this.setState({username})}
             editable={this.state.editMode}
           />
+          <Stack size={5} />
           {this.state.usernameError && <Text>{this.state.usernameError}</Text>}
+          <Stack size={10} />
+
           <CredentialTextInput
             placeholder="Email"
             placeholderTextColor="black"
@@ -243,25 +260,26 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
             onChangeText={email => this.setState({email})}
             editable={this.state.editMode}
           />
+          <Stack size={5} />
           {this.state.emailError && <Text>{this.state.emailError}</Text>}
+          <Stack size={10} />
 
           {/* button inside a container flex 1 justifyContent flex end */}
-          <View
+          <KeyboardAvoidingView
+            behavior="padding"
             style={{
               //flex: 1,
-              //flexDirection: 'row',
+              flexDirection: 'column',
               justifyContent: 'flex-end',
               borderWidth: 2,
               borderColor: 'red',
-              //height: '60%',
+              //height: '65%',
               width: '100%',
               alignItems: 'flex-end',
             }}>
             <FilledButton
               touchableOpacityStyle={ProfileScreenStyles.touchableOpacityStyle}
-              textStyle={ProfileScreenStyles.textStyle}
-              buttonColor="rgb(64, 80, 164)"
-              textColor="white"
+              textStyle={[ProfileScreenStyles.textStyle, {color: 'white'}]}
               title={this.state.editMode ? 'Update profile' : 'Show state'}
               onPress={
                 this.state.editMode
@@ -273,7 +291,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
                     }
               }
             />
-          </View>
+          </KeyboardAvoidingView>
         </BackgroundForm>
       </>
     );

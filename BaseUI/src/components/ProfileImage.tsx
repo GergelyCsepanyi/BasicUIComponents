@@ -6,7 +6,7 @@ import ProfileImageStyles from '../styles/ProfileImageStyles';
 class ProfileImage extends React.Component<ProfileImageProps, {}> {
   render(): React.ReactNode {
     return (
-      <View style={ProfileImageStyles.viewStyle}>
+      <View style={ProfileImageStyles.viewContainerStyle}>
         <TouchableOpacity
           onPress={this.props.onPress}
           disabled={this.props.disabled}
@@ -15,6 +15,7 @@ class ProfileImage extends React.Component<ProfileImageProps, {}> {
             source={{
               uri: this.props.image.uri,
             }}
+            imageStyle={{borderRadius: 20}}
             style={ProfileImageStyles.profileImageStyle}
             resizeMode={'cover'}>
             {this.props.editMode && (

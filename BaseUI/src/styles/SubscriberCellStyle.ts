@@ -5,9 +5,10 @@ const SubscriberCellStyle = StyleSheet.create({
     height: 67,
     //paddingHorizontal: 20,
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: 'blue',
+    // borderWidth: 1,
+    // borderColor: 'blue',
     alignItems: 'center',
+    marginBottom: 10,
   },
   touchableOpacityStyle: {
     flex: 2,

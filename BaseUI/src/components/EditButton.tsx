@@ -1,18 +1,9 @@
 import React from 'react';
 import TextButton from './TextButton';
+import EditButtonProps from '../interfaces/EditButtonProps';
 
 // This component's functioning like a wrapper
-class EditButton extends React.Component<
-  {
-    text: string;
-    color: string;
-    align: 'flex-start' | 'center';
-    textAlign?: 'center' | 'auto';
-    editMode: boolean;
-    onPress?: ((text: boolean) => void) | (() => void);
-  },
-  {}
-> {
+class EditButton extends React.Component<EditButtonProps, {}> {
   render(): React.ReactNode {
     if (!this.props.editMode) {
       return <TextButton {...this.props} />;

@@ -11,7 +11,7 @@ const SubscribersScreen = () => {
     {
       id: 1,
       image: {
-        uri: 'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg',
+        uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
       },
       name: 'First user',
       description: 'Description...',
@@ -20,7 +20,7 @@ const SubscribersScreen = () => {
     {
       id: 2,
       image: {
-        uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
+        uri: 'https://picsum.photos/id/237',
       },
       name: 'Second user',
       description: 'Description...',

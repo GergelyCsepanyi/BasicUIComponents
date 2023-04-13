@@ -37,6 +37,7 @@ const ProfileScreenStyles = StyleSheet.create({
     borderTopRightRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 30,
+    marginTop: 10,
     justifyContent: 'flex-end',
   },
 

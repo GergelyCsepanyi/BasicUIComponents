@@ -8,7 +8,6 @@ import FilledButton from './FilledButton';
 // import {CheckBox} from '@rneui/base';
 import CheckBox from '@react-native-community/checkbox';
 import {useSwipe} from '../hooks/useSwipe';
-import SubscriberItem from '../interfaces/SubscriberItem';
 
 // Icon.loadFont();
 
@@ -35,7 +34,7 @@ const SubscriberCell = (props: SubscriberCellProps) => {
   }
 
   const {onTouchStart, onTouchEnd} = useSwipe(onSwipeLeft, onSwipeRight);
-
+  //console.log(props.subscriber.image.uri);
   return (
     <View
       style={props.styles.subscriberCellContainerStyle}
@@ -43,9 +42,11 @@ const SubscriberCell = (props: SubscriberCellProps) => {
       onTouchEnd={onTouchEnd}>
       <View style={props.styles.imageStyle}>
         <Image
-          source={{
-            uri: 'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg',
-          }}
+          // source={{
+          //   uri: 'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg',
+          // }}
+          source={props.subscriber.image}
+          // source={props.subscriber.image}
         />
       </View>
       <View style={props.styles.subscriberTextsContainer}>

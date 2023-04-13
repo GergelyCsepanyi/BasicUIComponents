@@ -3,7 +3,7 @@ interface ProfileScreenState {
   email: string;
   usernameError: string;
   emailError: string;
-  image: {uri: string};
+  image: {uri: string} | string;
   editMode: boolean;
   followers: number;
   following: number;

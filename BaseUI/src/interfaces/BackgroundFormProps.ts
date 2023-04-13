@@ -9,7 +9,7 @@ interface BackgroundForm {
   editMode?: boolean;
   imageBackgroundStyle: StyleProp<ViewStyle>;
   backgroundFormChildrenContainerStyle: StyleProp<ViewStyle>;
-  profileHeaderContainerStyle: StyleProp<ViewStyle>;
+  profileHeaderContainerStyle?: StyleProp<ViewStyle>;
   searchbarContainerStyle?: StyleProp<ViewStyle>;
 }
 export default BackgroundForm;

@@ -37,16 +37,14 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
         />
         <Stack size={30} />
         <TextButton
+          touchableOpacityStyle={{alignSelf: 'flex-start'}}
+          textStyle={{color: 'rgb(64,80,164)', textAlign: 'auto'}}
           text="Forget password?"
-          align="flex-start"
-          color="rgb(64,80,164)"
-          textAlign="auto"
           onPress={() => {}}
         />
         <Stack size={40} />
         <FilledButton
-          buttonColor="rgb(64, 80, 164)"
-          textStyle={LoginScreenStyles.buttonTextStyle}
+          textStyle={[LoginScreenStyles.buttonTextStyle, {color: 'white'}]}
           touchableOpacityStyle={LoginScreenStyles.touchableOpacityStyle}
           title={'Sign In'}
           onPress={() =>
@@ -61,11 +59,10 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
         <Stack size={30} />
 
         <TextButton
+          touchableOpacityStyle={{alignSelf: 'center'}}
+          textStyle={{color: 'rgb(181, 182, 221)', textAlign: 'center'}}
           text="Don’t have an account?"
-          align="center"
-          color="rgb(181, 182, 221)"
           onPress={() => {}}
-          textAlign="center"
         />
       </BackgroundForm>
     );
