@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Image, Text} from 'react-native';
 import SubscriberCellProps from '../interfaces/SubscriberCellProps';
 //import SubscriberCellStyle from '../styles/SubscriberCellStyle';
@@ -6,13 +6,18 @@ import FilledButton from './FilledButton';
 // import {CheckBox} from 'react-native-elements';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 // import {CheckBox} from '@rneui/base';
-import CheckBox from '@react-native-community/checkbox';
+// import CheckBox from '@react-native-community/checkbox';
+import {CheckBox} from '@rneui/base';
 import {useSwipe} from '../hooks/useSwipe';
+import Colors from '../theme/Colors';
 
 // Icon.loadFont();
 
 const SubscriberCell = (props: SubscriberCellProps) => {
   //console.log(props.subscriber);
+
+  const [cbState, setCbState] = useState(false);
+
   function onSwipeLeft() {
     if (!props.setSubscribers) {
       return;
@@ -29,12 +34,10 @@ const SubscriberCell = (props: SubscriberCellProps) => {
     });
   }
 
-  function onSwipeRight() {
-    //console.log('SWIPE_RIGHT');
-  }
+  function onSwipeRight() {}
 
   const {onTouchStart, onTouchEnd} = useSwipe(onSwipeLeft, onSwipeRight);
-  //console.log(props.subscriber.image.uri);
+
   return (
     <View
       style={props.styles.subscriberCellContainerStyle}
@@ -42,11 +45,8 @@ const SubscriberCell = (props: SubscriberCellProps) => {
       onTouchEnd={onTouchEnd}>
       <View style={props.styles.imageStyle}>
         <Image
-          // source={{
-          //   uri: 'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg',
-          // }}
+          style={props.styles.imageStyle}
           source={props.subscriber.image}
-          // source={props.subscriber.image}
         />
       </View>
       <View style={props.styles.subscriberTextsContainer}>
@@ -62,8 +62,8 @@ const SubscriberCell = (props: SubscriberCellProps) => {
             props.styles.touchableOpacityStyle,
             {
               backgroundColor: props.subscriber.isFollowing
-                ? 'rgb(64, 80, 164)'
-                : 'rgba(190, 198, 255, 0.3)',
+                ? Colors.darkBlue
+                : Colors.lightBluePurple,
             },
           ]}
           onPress={props.onPressFollowButton}
@@ -71,8 +71,8 @@ const SubscriberCell = (props: SubscriberCellProps) => {
             props.styles.buttonTextStyle,
             {
               color: props.subscriber.isFollowing
-                ? 'white'
-                : 'rgb(77, 91, 177)',
+                ? Colors.white
+                : Colors.darkBlue,
             },
           ]}
           title={props.subscriber.isFollowing ? 'Following' : 'Follow'}
@@ -81,12 +81,25 @@ const SubscriberCell = (props: SubscriberCellProps) => {
 
       {props.renderComponentType === 'checkbox' && (
         <View style={props.styles.checkboxContainerStyle}>
-          <CheckBox
+          {/* @react-native-community/checkbox */}
+          {/* <CheckBox
             style={props.styles.checkboxStyle}
             disabled={false}
-            //checked={true}
-            //onPress={() => {}}
+            boxType="square"
+            onFillColor={Colors.darkBlue}
+            onTintColor={Colors.darkBlue}
+            onCheckColor={Colors.white}
+            tintColors={{true: Colors.darkBlue, false: Colors.darkBlue}}
             onValueChange={() => {}}
+            value={cbState}
+            onChange={() => setCbState(cbValue => !cbValue)}
+          /> */}
+          <CheckBox
+            checked={cbState}
+            onTouchEnd={() => setCbState(cbValue => !cbValue)}
+            containerStyle={{
+              padding: 5,
+            }}
           />
         </View>
       )}

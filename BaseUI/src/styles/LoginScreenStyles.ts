@@ -16,7 +16,7 @@ const LoginScreenStyles = StyleSheet.create({
     width: '100%',
     //height: '50%',
     //minHeight: '80%',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     borderTopLeftRadius: 20,
     alignItems: 'center',
     borderTopRightRadius: 20,

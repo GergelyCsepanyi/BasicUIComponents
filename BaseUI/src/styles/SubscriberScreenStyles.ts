@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../theme/Colors';
 
 const SubscriberScreenStyles = StyleSheet.create({
   flatListStyle: {width: '100%'},
@@ -8,7 +9,7 @@ const SubscriberScreenStyles = StyleSheet.create({
     paddingBottom: 10,
   },
   profileHeaderTextStyle: {
-    color: 'white',
+    color: Colors.white,
     fontWeight: 'bold',
     fontSize: 20,
   },
@@ -27,7 +28,7 @@ const SubscriberScreenStyles = StyleSheet.create({
     width: '100%',
     //height: '90%',
     minHeight: '80%',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingHorizontal: 20,
@@ -53,7 +54,7 @@ const SubscriberScreenStyles = StyleSheet.create({
       width: 92,
       fontSize: 12,
       borderRadius: 25,
-      backgroundColor: 'rgb(64, 80, 164)',
+      backgroundColor: Colors.darkBlue,
       justifyContent: 'center',
       alignItems: 'center',
 
@@ -76,11 +77,11 @@ const SubscriberScreenStyles = StyleSheet.create({
     },
 
     titleTextStyle: {
-      color: 'rgb(77,81,128)',
+      color: Colors.darkerDarkBlue,
       fontSize: 17,
       fontWeight: 'bold',
     },
-    descriptionTextStyle: {color: 'rgb(181, 182, 221)', fontSize: 12},
+    descriptionTextStyle: {color: Colors.bluePurple, fontSize: 12},
   },
 });
 

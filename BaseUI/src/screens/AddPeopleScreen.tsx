@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {SectionList, Text} from 'react-native';
 import BackgroundForm from '../components/BackgroundForm';
-import AddPeopleScreenStyles from '../styles/AddPeopleScreenStyles';
+import AddPeopleScreenStyles, {
+  subscriberCellStyles,
+} from '../styles/AddPeopleScreenStyles';
 import SubscriberCell from '../components/SubscriberCell';
 import {SearchBar} from '@rneui/base';
+import Images from '../theme/images/Images';
 
 const dataFromAPI = [
   {
@@ -11,9 +14,7 @@ const dataFromAPI = [
     data: [
       {
         id: 1,
-        image: {
-          uri: 'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg',
-        },
+        image: Images.profileImage,
         name: 'A user',
         description: 'Description...',
         isFollowing: true,
@@ -21,7 +22,7 @@ const dataFromAPI = [
       {
         id: 4,
         image: {
-          uri: 'file:///Users/gergely-csepanyi/Documents/Projects/04_BasicUIComponents/BaseUI/src/images/profileImagePlaceholder.jpg',
+          uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
         },
         name: 'A user s',
         description: 'Description...',
@@ -34,9 +35,7 @@ const dataFromAPI = [
     data: [
       {
         id: 2,
-        image: {
-          uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
-        },
+        image: Images.profileImage3,
         name: 'B user',
         description: 'Description...',
         isFollowing: true,
@@ -57,9 +56,7 @@ const dataFromAPI = [
     data: [
       {
         id: 91,
-        image: {
-          uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
-        },
+        image: Images.profileImage4,
         name: 'C user',
         description: 'Description...',
         isFollowing: true,
@@ -70,6 +67,27 @@ const dataFromAPI = [
           uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
         },
         name: 'C user 2',
+        description: 'Description...',
+        isFollowing: true,
+      },
+    ],
+  },
+  {
+    title: 'D',
+    data: [
+      {
+        id: 71,
+        image: Images.profileImage4,
+        name: 'D user',
+        description: 'Description...',
+        isFollowing: true,
+      },
+      {
+        id: 61,
+        image: {
+          uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
+        },
+        name: 'D user 2',
         description: 'Description...',
         isFollowing: true,
       },
@@ -122,7 +140,7 @@ const AddPeopleScreen = () => {
           placeholder="Search..."
           //onChangeText={text => updateView(text)} // This'll search immediately
           onChangeText={setSearchInputValue} // This'll wait 2 sec before search
-          value={search}
+          value={searchInputValue}
           containerStyle={AddPeopleScreenStyles.searchbarContainerStyle}
           inputContainerStyle={
             AddPeopleScreenStyles.searchbarInputContainerStyle
@@ -150,7 +168,7 @@ const AddPeopleScreen = () => {
         keyExtractor={(item, index) => (item.id + index) as unknown as string}
         renderItem={({item}) => (
           <SubscriberCell
-            styles={AddPeopleScreenStyles.subscriberCellStyles}
+            styles={subscriberCellStyles}
             renderComponentType="checkbox"
             subscriber={item}
             onPressFollowButton={() => {}}
@@ -162,6 +180,7 @@ const AddPeopleScreen = () => {
             {section.title}
           </Text>
         )}
+        style={{height: '30%'}}
       />
     </BackgroundForm>
   );

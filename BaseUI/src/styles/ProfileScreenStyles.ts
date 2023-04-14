@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../theme/Colors';
 
 const ProfileScreenStyles = StyleSheet.create({
   profileHeaderContainer: {
@@ -9,7 +10,7 @@ const ProfileScreenStyles = StyleSheet.create({
   profileTextStyle: {
     flex: 10,
     //width: '100%',
-    color: 'white',
+    color: Colors.white,
     fontSize: 20,
     fontWeight: 'bold',
     alignSelf: 'center',
@@ -31,7 +32,7 @@ const ProfileScreenStyles = StyleSheet.create({
     width: '100%',
     //height: '50%',
     //minHeight: '80%',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     borderTopLeftRadius: 20,
     alignItems: 'center',
     borderTopRightRadius: 20,
@@ -46,7 +47,7 @@ const ProfileScreenStyles = StyleSheet.create({
     height: 45,
     width: '100%',
     borderRadius: 25,
-    backgroundColor: 'rgb(64, 80, 164)',
+    backgroundColor: Colors.darkBlue,
     justifyContent: 'center',
     alignItems: 'center',
   },

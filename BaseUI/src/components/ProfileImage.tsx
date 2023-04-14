@@ -6,6 +6,7 @@ import Images from '../theme/images/Images';
 
 class ProfileImage extends React.Component<ProfileImageProps, {}> {
   render(): React.ReactNode {
+    console.log('image in imageview:', this.props.image);
     return (
       <View style={ProfileImageStyles.viewContainerStyle}>
         <TouchableOpacity
@@ -13,9 +14,7 @@ class ProfileImage extends React.Component<ProfileImageProps, {}> {
           disabled={this.props.disabled}
           style={ProfileImageStyles.touchableOpacityStyle}>
           <ImageBackground
-            source={{
-              uri: this.props.image.uri,
-            }}
+            source={this.props.image}
             imageStyle={{borderRadius: 20}}
             style={ProfileImageStyles.profileImageStyle}
             resizeMode={'cover'}>
@@ -33,5 +32,4 @@ class ProfileImage extends React.Component<ProfileImageProps, {}> {
     ); // marginTop -20 -15 position absolute top -15
   }
 }
-
 export default ProfileImage;

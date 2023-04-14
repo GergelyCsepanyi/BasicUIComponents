@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../theme/Colors';
 
 const FilledButtonStyles = StyleSheet.create({
   touchableOpacityStyle: {
     width: '100%',
     height: 50,
     borderRadius: 25,
-    backgroundColor: 'rgb(64, 80, 164)',
+    backgroundColor: Colors.darkBlue,
     justifyContent: 'center',
     alignItems: 'center',
     //marginTop: 222,
@@ -13,7 +14,7 @@ const FilledButtonStyles = StyleSheet.create({
 
   textStyle: {
     fontSize: 15,
-    color: 'white',
+    color: Colors.white,
   },
 });
 

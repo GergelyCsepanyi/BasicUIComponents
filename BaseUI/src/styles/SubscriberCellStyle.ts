@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../theme/Colors';
 
 const SubscriberCellStyle = StyleSheet.create({
   subscriberCellContainerStyle: {
@@ -17,7 +18,7 @@ const SubscriberCellStyle = StyleSheet.create({
     width: 92,
     fontSize: 12,
     borderRadius: 25,
-    backgroundColor: 'rgb(64, 80, 164)',
+    backgroundColor: Colors.darkBlue,
     justifyContent: 'center',
     alignItems: 'center',
 
@@ -30,7 +31,7 @@ const SubscriberCellStyle = StyleSheet.create({
     width: 47,
     height: 47,
     borderRadius: 8,
-    borderWidth: 1,
+    //borderWidth: 1,
     marginEnd: 15,
   },
 
@@ -40,11 +41,11 @@ const SubscriberCellStyle = StyleSheet.create({
   },
 
   titleTextStyle: {
-    color: 'rgb(77,81,128)',
+    color: Colors.darkerDarkBlue,
     fontSize: 17,
     fontWeight: 'bold',
   },
-  descriptionTextStyle: {color: 'rgb(181, 182, 221)', fontSize: 12},
+  descriptionTextStyle: {color: Colors.bluePurple, fontSize: 12},
 });
 
 export default SubscriberCellStyle;

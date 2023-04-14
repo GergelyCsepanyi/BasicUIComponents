@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../theme/Colors';
 
 const TextButtonStyles = StyleSheet.create({
   touchableOpacityStyle: {
@@ -10,7 +11,7 @@ const TextButtonStyles = StyleSheet.create({
     //flex: 1,
   },
   textStyle: {
-    color: 'rgb(64,80,164)',
+    color: Colors.darkBlue,
     fontSize: 13,
     textAlign: 'center',
   },

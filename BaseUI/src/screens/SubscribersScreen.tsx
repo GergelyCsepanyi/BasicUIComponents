@@ -5,23 +5,20 @@ import SubscriberScreenStyles from '../styles/SubscriberScreenStyles';
 import BackgroundForm from '../components/BackgroundForm';
 import SubscriberCell from '../components/SubscriberCell';
 import SubscriberCellStyle from '../styles/SubscriberCellStyle';
+import Images from '../theme/images/Images';
 
 const SubscribersScreen = () => {
   const [subscribers, setSubscribers] = useState<SubscriberItem[]>([
     {
       id: 1,
-      image: {
-        uri: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
-      },
+      image: Images.profileImage2,
       name: 'First user',
       description: 'Description...',
       isFollowing: true,
     },
     {
       id: 2,
-      image: {
-        uri: 'https://picsum.photos/id/237',
-      },
+      image: Images.profileImage3,
       name: 'Second user',
       description: 'Description...',
       isFollowing: true,
