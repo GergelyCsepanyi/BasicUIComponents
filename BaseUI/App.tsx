@@ -10,7 +10,6 @@ import TestScreen from './src/screens/TestScreen';
 class App extends React.Component {
   render(): React.ReactNode {
     // return <TestScreen />;
-
     // return <LoginScreen />;
     return <ProfileScreen />;
     // return <SubscribersScreen />;

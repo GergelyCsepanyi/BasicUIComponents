@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, KeyboardAvoidingView, Platform, Text} from 'react-native';
+import {KeyboardAvoidingView, Platform, Text} from 'react-native';
 import BackgroundForm from '../components/BackgroundForm';
 import CredentialTextInput from '../components/CredentialTextInput';
 import FilledButton from '../components/FilledButton';
@@ -106,7 +106,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
     this.toggleEditMode(this.state.editMode);
   };
 
-  pickImageAndStoreBase64Props = async (): Promise<void> => {
+  pickImageAndStoreState = async (): Promise<void> => {
     try {
       const result = await ImagePicker.launchImageLibrary({
         mediaType: 'photo',
@@ -151,16 +151,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        style={{
-          flex: 1,
-          borderColor: 'white',
-          borderWidth: 2,
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-          marginTop: 0,
-          paddingTop: 0,
-          marginBottom: 40,
-        }}>
+        style={ProfileScreenStyles.buttonContainerStyle}>
         <FilledButton
           touchableOpacityStyle={ProfileScreenStyles.touchableOpacityStyle}
           textStyle={[ProfileScreenStyles.textStyle, {color: Colors.white}]}
@@ -189,14 +180,10 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           }
           updateProfileButtonElement={this.updateProfileButtonElement()}
           editButtonElement={this.editButtonElement()}>
-          {/* <View
-            style={{
-              flex: 1,
-            }}> */}
           <ProfileImage
             disabled={!this.state.editMode}
             editMode={this.state.editMode}
-            onPress={this.pickImageAndStoreBase64Props}
+            onPress={this.pickImageAndStoreState}
             image={this.state.image}
           />
           {!this.state.editMode && (
@@ -229,25 +216,6 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           <Stack size={5} />
           {this.state.emailError && <Text>{this.state.emailError}</Text>}
           <Stack size={10} />
-          {/* </View> */}
-
-          {/* button inside a container flex 1 justifyContent flex end */}
-          {/* <View
-            //behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-            style={{
-              // flex: 1,
-              flexDirection: 'column',
-              justifyContent: 'flex-end',
-              borderWidth: 2,
-              borderColor: 'red',
-              //height: '65%',
-              width: '100%',
-              alignItems: 'flex-end',
-              alignContent: 'flex-end',
-              alignSelf: 'flex-end',
-            }}> */}
-
-          {/* </View> */}
         </BackgroundForm>
       </>
     );

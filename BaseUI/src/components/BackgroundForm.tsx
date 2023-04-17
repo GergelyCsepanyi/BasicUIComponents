@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import backgroundImage from '../theme/images/backgroundImage';
 import BackgroundFormStyles from '../styles/BackgroundFormStyles';
-import {Button} from '@rneui/base';
 
 interface BackgroundFormProps {
   searchbar?: React.ReactNode;

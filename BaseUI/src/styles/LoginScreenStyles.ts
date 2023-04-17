@@ -14,6 +14,7 @@ const LoginScreenStyles = StyleSheet.create({
   backgroundFormChildrenContainer: {
     //flex: 1,
     width: '100%',
+    //maxHeight: '80%',
     //height: '50%',
     //minHeight: '80%',
     backgroundColor: Colors.white,

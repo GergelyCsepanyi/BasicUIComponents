@@ -20,8 +20,17 @@ const MyComponent = () => {
         backgroundColor: 'grey',
         // borderColor: 'red',
         // borderWidth: 1,
+        paddingTop: Platform.OS === 'android' ? 25 : 0,
         flex: 1,
       }}>
+      {/* <View
+      style={{
+        backgroundColor: 'grey',
+        // borderColor: 'red',
+        // borderWidth: 1,
+        //paddingTop: Platform.OS === 'android' ? 25 : 0,
+        flex: 1,
+      }}> */}
       <View
         style={{
           flex: 1,
@@ -73,6 +82,7 @@ const MyComponent = () => {
         <Button title="Save" onPress={() => setText(textInput)} />
       </KeyboardAvoidingView>
     </SafeAreaView>
+    // </View>
   );
 };
 

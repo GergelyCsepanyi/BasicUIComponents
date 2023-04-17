@@ -46,6 +46,17 @@ const ProfileScreenStyles = StyleSheet.create({
     // borderWidth: 4,
   },
 
+  buttonContainerStyle: {
+    flex: 1,
+    borderColor: 'white',
+    borderWidth: 2,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: 0,
+    paddingTop: 0,
+    marginBottom: 40,
+  },
+
   touchableOpacityStyle: {
     //flex: 1,
     height: 45,
