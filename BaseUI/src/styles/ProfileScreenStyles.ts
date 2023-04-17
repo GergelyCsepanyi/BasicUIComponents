@@ -26,6 +26,8 @@ const ProfileScreenStyles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingTop: 122,
     height: '50%',
+    // borderColor: 'orange',
+    // borderWidth: 4,
   },
   backgroundFormChildrenContainer: {
     //flex: 1,
@@ -40,6 +42,8 @@ const ProfileScreenStyles = StyleSheet.create({
     paddingVertical: 30,
     marginTop: 10,
     justifyContent: 'flex-end',
+    // borderColor: 'purple',
+    // borderWidth: 4,
   },
 
   touchableOpacityStyle: {

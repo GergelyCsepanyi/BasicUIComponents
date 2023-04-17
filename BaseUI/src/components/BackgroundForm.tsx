@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import backgroundImage from '../theme/images/backgroundImage';
 import BackgroundFormStyles from '../styles/BackgroundFormStyles';
+import {Button} from '@rneui/base';
 
 interface BackgroundFormProps {
   searchbar?: React.ReactNode;
@@ -50,6 +51,16 @@ class BackgroundForm extends React.Component<BackgroundFormProps, {}> {
             <View style={this.props.backgroundFormChildrenContainerStyle}>
               {this.props.children}
             </View>
+            {/* <View
+              style={{
+                flex: 1,
+                borderColor: 'red',
+                borderWidth: 2,
+                height: '50%',
+                justifyContent: 'flex-end',
+              }}>
+              <Button title='test' />
+            </View> */}
           </KeyboardAvoidingView>
         </ImageBackground>
       </>

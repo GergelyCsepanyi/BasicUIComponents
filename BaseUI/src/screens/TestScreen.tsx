@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   View,
@@ -5,55 +6,73 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  Text,
+  Button,
 } from 'react-native';
 
 const MyComponent = () => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState('Text');
+  const [textInput, setTextInput] = useState('');
 
   return (
-    <KeyboardAvoidingView
+    <SafeAreaView
       style={{
+        backgroundColor: 'grey',
+        // borderColor: 'red',
+        // borderWidth: 1,
         flex: 1,
-        backgroundColor: 'rgb(220, 218, 229)',
-        borderColor: 'blue',
-        borderWidth: 5,
-      }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      keyboardVerticalOffset={100}>
-      <SafeAreaView
-        style={{flex: 1, height: '100%', borderColor: 'red', borderWidth: 5}}>
-        <TextInput
-          style={{
-            marginTop: 20,
-            paddingHorizontal: 10,
-            paddingVertical: 5,
-            borderWidth: 5,
-            borderColor: 'green',
-            color: 'magenta',
-          }}
-          value={text}
-          onChangeText={setText}
-          placeholder="Text..."
-          placeholderTextColor="black"
-        />
+      }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          borderColor: 'yellow',
+          borderWidth: 1,
+          paddingBottom: 12,
+        }}>
+        <Text style={{color: 'white', fontSize: 22}}>Test Title</Text>
+      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{
+          //flex: 4,
+          height: '80%',
+          borderColor: 'red',
+          borderWidth: 1,
+        }}>
         <View
           style={{
+            borderColor: 'blue',
+            borderWidth: 1,
             flex: 1,
-            justifyContent: 'flex-end',
-            borderColor: 'orange',
-            borderWidth: 5,
+            margin: 10,
           }}>
-          <View
+          <Text style={{color: 'white'}}>{text}</Text>
+          <TextInput
             style={{
-              height: 100,
-              backgroundColor: 'red',
-              borderColor: 'yellow',
-              borderWidth: 5,
+              borderColor: 'white',
+              borderWidth: 1,
+              marginTop: 5,
+              padding: 5,
             }}
+            placeholder="Type something here..."
+            placeholderTextColor={'white'}
+            onChangeText={setTextInput}
           />
         </View>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+        {/* <View
+          //behavior="padding"
+          style={{
+            borderColor: 'pink',
+            borderWidth: 1,
+            justifyContent: 'flex-end',
+            flex: 1,
+            margin: 10,
+          }}></View> */}
+        <Button title="Save" onPress={() => setText(textInput)} />
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
