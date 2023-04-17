@@ -49,7 +49,7 @@ const ProfileScreenStyles = StyleSheet.create({
   touchableOpacityStyle: {
     //flex: 1,
     height: 45,
-    width: '100%',
+    width: '90%',
     borderRadius: 25,
     backgroundColor: Colors.darkBlue,
     justifyContent: 'center',

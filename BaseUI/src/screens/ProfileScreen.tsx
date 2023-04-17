@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Button, KeyboardAvoidingView, Platform, Text} from 'react-native';
 import BackgroundForm from '../components/BackgroundForm';
 import CredentialTextInput from '../components/CredentialTextInput';
 import FilledButton from '../components/FilledButton';
@@ -147,6 +147,31 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
     );
   };
 
+  updateProfileButtonElement() {
+    return (
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{
+          flex: 1,
+          borderColor: 'white',
+          borderWidth: 2,
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          marginTop: 0,
+          paddingTop: 0,
+          marginBottom: 40,
+        }}>
+        <FilledButton
+          touchableOpacityStyle={ProfileScreenStyles.touchableOpacityStyle}
+          textStyle={[ProfileScreenStyles.textStyle, {color: Colors.white}]}
+          title={this.state.editMode ? 'Update profile' : 'Show state'}
+          onPress={() =>
+            this.state.editMode ? this.handleUpdate() : console.log(this.state)
+          }
+        />
+      </KeyboardAvoidingView>
+    );
+  }
   render(): React.ReactNode {
     return (
       <>
@@ -162,6 +187,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           backgroundFormChildrenContainerStyle={
             ProfileScreenStyles.backgroundFormChildrenContainer
           }
+          updateProfileButtonElement={this.updateProfileButtonElement()}
           editButtonElement={this.editButtonElement()}>
           {/* <View
             style={{
@@ -220,16 +246,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
               alignContent: 'flex-end',
               alignSelf: 'flex-end',
             }}> */}
-          <FilledButton
-            touchableOpacityStyle={ProfileScreenStyles.touchableOpacityStyle}
-            textStyle={[ProfileScreenStyles.textStyle, {color: Colors.white}]}
-            title={this.state.editMode ? 'Update profile' : 'Show state'}
-            onPress={() =>
-              this.state.editMode
-                ? this.handleUpdate()
-                : console.log(this.state)
-            }
-          />
+
           {/* </View> */}
         </BackgroundForm>
       </>

@@ -17,6 +17,7 @@ interface BackgroundFormProps {
   profileImageElement?: React.ReactNode;
   mainTitleElement?: React.ReactNode;
   editButtonElement?: React.ReactNode;
+  updateProfileButtonElement?: React.ReactNode;
   editMode?: boolean;
   imageBackgroundStyle: StyleProp<ViewStyle>;
   backgroundFormChildrenContainerStyle: StyleProp<ViewStyle>;
@@ -51,17 +52,8 @@ class BackgroundForm extends React.Component<BackgroundFormProps, {}> {
             <View style={this.props.backgroundFormChildrenContainerStyle}>
               {this.props.children}
             </View>
-            {/* <View
-              style={{
-                flex: 1,
-                borderColor: 'red',
-                borderWidth: 2,
-                height: '50%',
-                justifyContent: 'flex-end',
-              }}>
-              <Button title='test' />
-            </View> */}
           </KeyboardAvoidingView>
+          {this.props.updateProfileButtonElement}
         </ImageBackground>
       </>
     );
