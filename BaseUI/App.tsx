@@ -9,9 +9,9 @@ import TestScreen from './src/screens/TestScreen';
 
 class App extends React.Component {
   render(): React.ReactNode {
-    // return <TestScreen />;
+    return <TestScreen />;
     // return <LoginScreen />;
-    return <ProfileScreen />;
+    // return <ProfileScreen />;
     // return <SubscribersScreen />;
     // return <AddPeopleScreen />;
     // return (

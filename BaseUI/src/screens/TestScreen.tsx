@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
+import {StyleProp, TextStyle, ViewStyle, TouchableOpacity} from 'react-native';
 import {
   View,
   TextInput,
@@ -7,8 +8,28 @@ import {
   Platform,
   SafeAreaView,
   Text,
-  Button,
+  Keyboard,
 } from 'react-native';
+
+interface FilledButtonProps {
+  text: string;
+  touchableOppacityStyle: StyleProp<ViewStyle>;
+  textStyle: StyleProp<TextStyle>;
+  onPress: () => any;
+}
+
+const FilledButton: React.FC<FilledButtonProps> = ({
+  text,
+  touchableOppacityStyle,
+  textStyle,
+  onPress,
+}) => {
+  return (
+    <TouchableOpacity style={touchableOppacityStyle} onPress={onPress}>
+      <Text style={textStyle}>{text}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const MyComponent = () => {
   const [text, setText] = useState('Text');
@@ -37,6 +58,7 @@ const MyComponent = () => {
           justifyContent: 'flex-end',
           alignItems: 'center',
           borderColor: 'yellow',
+          //backgroundColor: 'grey',
           borderWidth: 1,
           paddingBottom: 12,
         }}>
@@ -49,6 +71,9 @@ const MyComponent = () => {
           height: '80%',
           borderColor: 'red',
           borderWidth: 1,
+          backgroundColor: 'white',
+          borderTopStartRadius: 20,
+          borderTopEndRadius: 20,
         }}>
         <View
           style={{
@@ -57,10 +82,10 @@ const MyComponent = () => {
             flex: 1,
             margin: 10,
           }}>
-          <Text style={{color: 'white'}}>{text}</Text>
+          <Text style={{color: 'black'}}>{text}</Text>
           <TextInput
             style={{
-              borderColor: 'white',
+              borderColor: 'black',
               borderWidth: 1,
               marginTop: 5,
               padding: 5,
@@ -71,15 +96,37 @@ const MyComponent = () => {
           />
         </View>
         {/* <View
-          //behavior="padding"
           style={{
-            borderColor: 'pink',
-            borderWidth: 1,
-            justifyContent: 'flex-end',
-            flex: 1,
-            margin: 10,
-          }}></View> */}
-        <Button title="Save" onPress={() => setText(textInput)} />
+            marginBottom: 5,
+            //alignItems: 'center',
+            width: '100%',
+          }}> */}
+        <FilledButton
+          touchableOppacityStyle={{
+            backgroundColor: 'blue',
+            alignItems: 'center',
+            alignSelf: 'center',
+            justifyContent: 'center',
+            width: '90%',
+            height: 45,
+            borderRadius: 20,
+            marginBottom: 10,
+          }}
+          textStyle={{
+            fontSize: 18,
+            color: 'white',
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+          }}
+          text="Save"
+          onPress={() => {
+            setText(textInput);
+            Keyboard.dismiss();
+          }}
+        />
+        {/* </View> */}
       </KeyboardAvoidingView>
     </SafeAreaView>
     // </View>
