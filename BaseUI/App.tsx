@@ -5,20 +5,14 @@ import SubscribersScreen from './src/screens/SubscribersScreen';
 import AddPeopleScreen from './src/screens/AddPeopleScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import TestScreen from './src/screens/TestScreen';
-// import {NavigationContainer} from '@react-navigation/native';
 
 class App extends React.Component {
   render(): React.ReactNode {
     // return <TestScreen />;
-    // return <LoginScreen />;
-    return <ProfileScreen />;
+    return <LoginScreen />;
+    // return <ProfileScreen />;
     // return <SubscribersScreen />;
     // return <AddPeopleScreen />;
-    // return (
-    //   <GestureHandlerRootView style={{flex: 1}}>
-    //     <AddPeopleScreen />;
-    //   </GestureHandlerRootView>
-    // );
   }
 }
 

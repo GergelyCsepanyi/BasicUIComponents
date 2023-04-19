@@ -1,4 +1,4 @@
-import {ImageSourcePropType} from 'react-native/types';
+import {ImageSourcePropType} from 'react-native';
 
 interface SubscriberItem {
   id: number;
