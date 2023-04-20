@@ -21,24 +21,14 @@ const LoginScreenStyles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
 
-  signInButton_touchableOpacity: {
+  filledButtonContainer: {
     height: 45,
     width: '100%',
-    borderRadius: 25,
-    backgroundColor: Colors.darkBlue,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  signInButton_textStyle: {fontSize: 15, color: Colors.white},
 
-  forgetPasswordButton_touchableOpacityStyle: {alignSelf: 'flex-start'},
-  forgetPasswordButton_textStyle: {color: Colors.darkBlue, textAlign: 'auto'},
+  forgetButtonContainer: {alignSelf: 'flex-start'},
 
-  dontHaveAccountButton_touchableOpacityStyle: {alignSelf: 'center'},
-  dontHaveAccountButton_textStyle: {
-    color: Colors.bluePurple,
-    textAlign: 'center',
-  },
+  dontHaveButtonContainer: {alignSelf: 'center'},
 });
 
 export default LoginScreenStyles;

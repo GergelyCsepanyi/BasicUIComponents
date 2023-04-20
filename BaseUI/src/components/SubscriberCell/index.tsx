@@ -1,29 +1,46 @@
 import React, {useState} from 'react';
 import {View, Image, Text} from 'react-native';
-import SubscriberCellProps from '../../interfaces/SubscriberCellProps';
 import FilledButton from '../FilledButton';
 import {CheckBox} from '@rneui/base';
 import {useSwipe} from '../../hooks/useSwipe';
 import Colors from '../../theme/Colors';
 import SubscriberCellStyle from './styles';
+import SubscriberItem from '../../interfaces/SubscriberItem';
+
+interface SubscriberCellProps {
+  subscriber: SubscriberItem;
+  renderComponentType: 'button' | 'checkbox';
+
+  paddingStart?: number;
+  onSubscriberSwipedLeft?: (id: number) => void;
+
+  setSubscribers?: React.Dispatch<
+    React.SetStateAction<
+      {
+        title: string;
+        data: {
+          id: number;
+          image: {
+            uri: string;
+          };
+          name: string;
+          description: string;
+          isFollowing: boolean;
+        }[];
+      }[]
+    >
+  >;
+  onPressFollowButton?: () => void;
+}
 
 const SubscriberCell = (props: SubscriberCellProps) => {
   const [cbState, setCbState] = useState(false);
 
   function onSwipeLeft() {
-    if (!props.setSubscribers) {
+    if (!props.onSubscriberSwipedLeft) {
       return;
     }
-
-    props.setSubscribers(data => {
-      const filteredData = data.map(section => {
-        const filteredSectionData = section.data.filter(
-          item => item.id !== props.subscriber.id,
-        );
-        return {...section, data: filteredSectionData};
-      });
-      return filteredData.filter(section => section.data.length > 0);
-    });
+    props.onSubscriberSwipedLeft(props.subscriber.id);
   }
 
   function onSwipeRight() {}
@@ -32,47 +49,46 @@ const SubscriberCell = (props: SubscriberCellProps) => {
 
   return (
     <View
-      style={props.styles.subscriberCellContainerStyle}
+      style={[
+        SubscriberCellStyle.subscriberCellContainerStyle,
+        props.paddingStart ? {paddingStart: props.paddingStart} : {},
+      ]}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}>
-      <View style={props.styles.imageStyle}>
+      <View style={SubscriberCellStyle.imageStyle}>
         <Image
-          style={props.styles.imageStyle}
-          source={props.subscriber.image}
+          style={SubscriberCellStyle.imageStyle}
+          source={props.subscriber.image ?? {}}
         />
       </View>
-      <View style={props.styles.subscriberTextsContainer}>
-        <Text style={props.styles.titleTextStyle}>{props.subscriber.name}</Text>
-        <Text style={props.styles.descriptionTextStyle}>
+      <View style={SubscriberCellStyle.subscriberTextsContainer}>
+        <Text style={SubscriberCellStyle.titleTextStyle}>
+          {props.subscriber.name}
+        </Text>
+        <Text style={SubscriberCellStyle.descriptionTextStyle}>
           {props.subscriber.description}
         </Text>
       </View>
 
       {props.renderComponentType === 'button' && (
-        <FilledButton
-          touchableOpacityStyle={[
-            props.styles.touchableOpacityStyle,
-            {
-              backgroundColor: props.subscriber.isFollowing
+        <View style={SubscriberCellStyle.filledButtonContainer}>
+          <FilledButton
+            backgroundColor={
+              props.subscriber.isFollowing
                 ? Colors.darkBlue
-                : Colors.lightBluePurple,
-            },
-          ]}
-          onPress={props.onPressFollowButton}
-          textStyle={[
-            props.styles.buttonTextStyle,
-            {
-              color: props.subscriber.isFollowing
-                ? Colors.white
-                : Colors.darkBlue,
-            },
-          ]}
-          title={props.subscriber.isFollowing ? 'Following' : 'Follow'}
-        />
+                : Colors.lightBluePurple
+            }
+            textColor={
+              props.subscriber.isFollowing ? Colors.white : Colors.darkBlue
+            }
+            onPress={props.onPressFollowButton ?? (() => {})}
+            title={props.subscriber.isFollowing ? 'Following' : 'Follow'}
+          />
+        </View>
       )}
 
       {props.renderComponentType === 'checkbox' && (
-        <View style={props.styles.checkboxContainerStyle}>
+        <View style={SubscriberCellStyle.checkboxContainerStyle}>
           <CheckBox
             checked={cbState}
             onTouchEnd={() => setCbState(cbValue => !cbValue)}

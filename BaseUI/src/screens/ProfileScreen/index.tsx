@@ -1,5 +1,5 @@
 import React from 'react';
-import {KeyboardAvoidingView, Platform, Text} from 'react-native';
+import {KeyboardAvoidingView, Platform, Text, View} from 'react-native';
 import BackgroundForm from '../../components/BackgroundForm';
 import CredentialTextInput from '../../components/CredentialTextInput';
 import FilledButton from '../../components/FilledButton';
@@ -7,7 +7,6 @@ import ProfileImage from '../../components/ProfileImage';
 import ProfileScreenStyles from './styles';
 import * as ImagePicker from 'react-native-image-picker';
 import SocialSection from '../../components/SocialSection';
-import TextButtonStyles from '../../components/TextButton/styles';
 import {Stack} from 'react-native-spacing-system';
 import TextButton from '../../components/TextButton';
 import Images from '../../assets/images/Images';
@@ -15,65 +14,78 @@ import StorageService from '../../services/StorageService';
 import Colors from '../../theme/Colors';
 
 interface ProfileScreenState {
-  username: string | null;
-  email: string;
+  user: {
+    username: string | null;
+    email: string;
+    image: ImagePicker.Asset | string;
+  };
   usernameError: string;
   emailError: string;
-  image: {uri: string} | string;
   editMode: boolean;
   followers: number;
   following: number;
 }
 
-class ProfileScreen extends React.Component<{}, ProfileScreenState> {
-  //InitialProfilePicture = Images.profileImage;
+const INITIAL_USERDATA = {
+  username: 'InitialUsername',
+  email: 'InitialEmail@test.test',
+  image: Images.profileImage,
+};
 
+class ProfileScreen extends React.Component<{}, ProfileScreenState> {
   state = {
-    username: '',
-    email: '',
+    user: {
+      username: INITIAL_USERDATA.username,
+      email: INITIAL_USERDATA.email,
+      image: INITIAL_USERDATA.image,
+    },
     usernameError: '',
     emailError: '',
-    // image: {
-    //   uri: this.InitialProfilePicture,
-    //   //uri: require(this.InitialProfilePicture),
-    // },
-    image: Images.profileImage,
 
     editMode: false,
     followers: 23,
     following: 234,
   };
-  componentDidMount() {
-    let username = '';
-    StorageService.getData('username').then(result => {
-      username = result || 'InitialUsername';
-      this.setState({username});
-    });
 
-    let email = '';
-    StorageService.getData('email').then(result => {
-      email = result || 'InitialEmail@test.test';
-      this.setState({email});
-    });
-
-    let image = {
-      //uri: Images.profileImage,
+  async getDataFromLocalstorage() {
+    const user = {
+      username: '',
+      email: '',
+      image: {uri: ''},
     };
-    StorageService.getDataObj('image').then(result => {
-      image = result || Images.profileImage;
-      console.log('image here:', image);
-      console.log('profileimage here:', Images.profileImage);
-      console.log('result here:', result);
 
-      this.setState({image});
-    });
+    user.username =
+      (await StorageService.getData('username')) || INITIAL_USERDATA.username;
+
+    user.email =
+      (await StorageService.getData('email')) || INITIAL_USERDATA.email;
+
+    user.image =
+      (await StorageService.getDataObj('image')) || INITIAL_USERDATA.image;
+
+    this.setState({user});
 
     //StorageService.clearStorage();
   }
 
+  componentDidMount() {
+    this.getDataFromLocalstorage();
+  }
+
   toggleEditMode = (editMode: boolean) => {
-    console.log('toggle');
     this.setState({editMode: !editMode});
+  };
+
+  handleEmailChange = (email: string) => {
+    this.setState(prevState => ({
+      user: {...prevState.user, email: email},
+    }));
+  };
+
+  handleUsernameChange = (username: string) => {
+    this.setState(prevState => ({
+      user: {...prevState.user, username: username},
+    }));
   };
 
   handleUpdate = () => {
@@ -82,21 +94,21 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
       emailError: '',
     });
 
-    if (this.state.username === '') {
+    if (this.state.user.username === '') {
       this.setState({
         usernameError: 'Username should be at least 1 character',
       });
       return;
     }
 
-    if (this.state.username.length > 20) {
+    if (this.state.user.username.length > 20) {
       this.setState({
         usernameError: 'Username cant be more than 20 characters',
       });
       return;
     }
 
-    if (!this.state.username.match(new RegExp(/^[a-zA-Z]{1,20}$/gm))) {
+    if (!this.state.user.username.match(new RegExp(/^[a-zA-Z]{1,20}$/gm))) {
       this.setState({
         usernameError: 'Username can contain only Latin letters',
       });
@@ -104,14 +116,16 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
     }
 
     if (
-      !this.state.email.match(new RegExp(/^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/))
+      !this.state.user.email.match(
+        new RegExp(/^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/),
+      )
     ) {
       this.setState({emailError: 'Invalid email pattern!'});
       return;
     }
 
-    StorageService.storeData('username', this.state.username);
-    StorageService.storeData('email', this.state.email);
+    StorageService.storeData('username', this.state.user.username);
+    StorageService.storeData('email', this.state.user.email);
 
     this.toggleEditMode(this.state.editMode);
   };
@@ -123,18 +137,28 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
         selectionLimit: 1,
       });
 
-      if (result.didCancel) {
-        return;
-        // throw new Error('The image selection was cancelled.');
+      if (!result || !result.assets) {
+        throw new Error('Error during image selection!');
       }
 
       if (!result.assets[0].uri) {
         throw new Error('Image not found!');
       }
 
-      this.setState({image: result.assets[0]});
-      StorageService.storeDataObj('image', result.assets[0]);
-      console.log('result.assets[0]', result.assets[0]);
+      if (result.didCancel) {
+        return;
+      }
+
+      this.setState(prevState => ({
+        user: {
+          ...prevState.user,
+          image: result?.assets ? result.assets[0] : INITIAL_USERDATA.image,
+        },
+      }));
+      StorageService.storeDataObj(
+        'image',
+        result?.assets ? result.assets[0] : INITIAL_USERDATA.image,
+      );
     } catch (error) {
       console.log('ERROR during image selection:', error);
     }
@@ -142,18 +166,13 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
 
   editButtonElement = () => {
     return (
-      <TextButton
-        touchableOpacityStyle={[
-          TextButtonStyles.touchableOpacityStyle,
-          {alignItems: 'center', paddingEnd: 5},
-        ]}
-        textStyle={[
-          TextButtonStyles.textStyle,
-          {color: Colors.white, textAlign: 'center'},
-        ]}
-        text={'Edit'}
-        onPress={() => this.toggleEditMode(this.state.editMode)}
-      />
+      <View style={ProfileScreenStyles.textButtonContainer}>
+        <TextButton
+          color={Colors.white}
+          text={'Edit'}
+          onPress={() => this.toggleEditMode(this.state.editMode)}
+        />
+      </View>
     );
   };
 
@@ -162,17 +181,20 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={ProfileScreenStyles.buttonContainerStyle}>
-        <FilledButton
-          touchableOpacityStyle={ProfileScreenStyles.touchableOpacityStyle}
-          textStyle={[ProfileScreenStyles.textStyle, {color: Colors.white}]}
-          title={this.state.editMode ? 'Update profile' : 'Show state'}
-          onPress={() =>
-            this.state.editMode ? this.handleUpdate() : console.log(this.state)
-          }
-        />
+        <View style={ProfileScreenStyles.filledButtonContainer}>
+          <FilledButton
+            title={this.state.editMode ? 'Update profile' : 'Show state'}
+            onPress={() =>
+              this.state.editMode
+                ? this.handleUpdate()
+                : console.log(this.state)
+            }
+          />
+        </View>
       </KeyboardAvoidingView>
     );
   }
+
   render(): React.ReactNode {
     return (
       <>
@@ -194,7 +216,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
             disabled={!this.state.editMode}
             editMode={this.state.editMode}
             onPress={this.pickImageAndStoreState}
-            image={this.state.image}
+            image={this.state.user.image}
           />
           {!this.state.editMode && (
             <>
@@ -208,8 +230,8 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           <CredentialTextInput
             placeholder="Username"
             placeholderTextColor="black"
-            value={this.state.username}
-            onChangeText={username => this.setState({username})}
+            value={this.state.user.username}
+            onChangeText={username => this.handleUsernameChange(username)}
             editable={this.state.editMode}
           />
           <Stack size={5} />
@@ -219,8 +241,8 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
           <CredentialTextInput
             placeholder="Email"
             placeholderTextColor="black"
-            value={this.state.email}
-            onChangeText={email => this.setState({email})}
+            value={this.state.user.email}
+            onChangeText={email => this.handleEmailChange(email)}
             editable={this.state.editMode}
           />
           <Stack size={5} />

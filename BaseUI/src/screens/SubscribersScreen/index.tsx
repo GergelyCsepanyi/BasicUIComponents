@@ -3,7 +3,6 @@ import {FlatList, ListRenderItemInfo, Text} from 'react-native';
 import SubscriberScreenStyles from './styles';
 import BackgroundForm from '../../components/BackgroundForm';
 import SubscriberCell from '../../components/SubscriberCell';
-import SubscriberCellStyle from '../../components/SubscriberCell/styles';
 import Images from '../../assets/images/Images';
 import SubscriberItem from '../../interfaces/SubscriberItem';
 
@@ -39,7 +38,6 @@ const SubscribersScreen = () => {
   const renderItem = (itemProps: ListRenderItemInfo<SubscriberItem>) => {
     return (
       <SubscriberCell
-        styles={SubscriberCellStyle}
         renderComponentType="button"
         subscriber={itemProps.item}
         onPressFollowButton={() => {

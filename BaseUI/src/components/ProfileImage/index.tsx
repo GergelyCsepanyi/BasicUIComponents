@@ -7,12 +7,11 @@ interface ProfileImageProps {
   editMode?: boolean;
   onPress?: () => void;
   disabled: boolean;
-  image: {uri: string} | string;
+  image: {uri: string};
 }
 
 class ProfileImage extends React.Component<ProfileImageProps, {}> {
   render(): React.ReactNode {
-    console.log('image in imageview:', this.props.image);
     return (
       <View style={ProfileImageStyles.viewContainerStyle}>
         <TouchableOpacity

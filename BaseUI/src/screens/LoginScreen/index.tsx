@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import BackgroundForm from '../../components/BackgroundForm';
 import CredentialTextInput from '../../components/CredentialTextInput';
 import FilledButton from '../../components/FilledButton';
@@ -19,6 +19,7 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
     email: '',
     password: '',
   };
+
   render() {
     return (
       <BackgroundForm
@@ -41,25 +42,18 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
           onChangeText={password => this.setState({password})}
         />
         <Stack size={30} />
-        <TextButton
-          touchableOpacityStyle={
-            LoginScreenStyles.forgetPasswordButton_touchableOpacityStyle
-          }
-          textStyle={LoginScreenStyles.forgetPasswordButton_textStyle}
-          text="Forget password?"
-          onPress={() => {}}
-        />
+        <View style={LoginScreenStyles.forgetButtonContainer}>
+          <TextButton text="Forget Password?" />
+        </View>
         <Stack size={40} />
-        <FilledButton
-          textStyle={LoginScreenStyles.signInButton_textStyle}
-          touchableOpacityStyle={
-            LoginScreenStyles.signInButton_touchableOpacity
-          }
-          title={'Sign In'}
-          onPress={() =>
-            console.log("'Sign in' button was pressed", this.state)
-          }
-        />
+        <View style={LoginScreenStyles.filledButtonContainer}>
+          <FilledButton
+            title="Sign In"
+            onPress={() =>
+              console.log("'Sign in' button was pressed", this.state)
+            }
+          />
+        </View>
         <Stack size={18} />
         <Text style={LoginScreenStyles.textStyle}>or sign in with</Text>
         <Stack size={18} />
@@ -67,14 +61,10 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
         <SocialNetworkButtonForm />
         <Stack size={30} />
 
-        <TextButton
-          touchableOpacityStyle={
-            LoginScreenStyles.dontHaveAccountButton_touchableOpacityStyle
-          }
-          textStyle={LoginScreenStyles.dontHaveAccountButton_textStyle}
-          text="Don’t have an account?"
-          onPress={() => {}}
-        />
+        <View style={LoginScreenStyles.dontHaveButtonContainer}>
+          <TextButton color={Colors.bluePurple} text="Don’t have an account?" />
+        </View>
+        <Stack size={10} />
       </BackgroundForm>
     );
   }

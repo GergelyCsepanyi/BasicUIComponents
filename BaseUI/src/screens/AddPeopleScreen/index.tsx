@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {SectionList, Text} from 'react-native';
 import BackgroundForm from '../../components/BackgroundForm';
-import AddPeopleScreenStyles, {subscriberCellStyles} from './styles';
+import AddPeopleScreenStyles from './styles';
 import SubscriberCell from '../../components/SubscriberCell';
 import {SearchBar} from '@rneui/base';
 import Images from '../../assets/images/Images';
@@ -93,6 +93,8 @@ const dataFromAPI = [
   },
 ];
 
+const DELAY_FOR_SEARCHING = 2000;
+
 const AddPeopleScreen = () => {
   const [data, setData] = useState(dataFromAPI);
   const [search, setSearch] = useState(data);
@@ -114,17 +116,15 @@ const AddPeopleScreen = () => {
         });
         return filteredData.filter(section => section.data.length > 0);
       });
-    }, 2000);
+    }, DELAY_FOR_SEARCHING);
 
     return () => clearTimeout(timer);
-  }, [searchInputValue]);
+  }, [searchInputValue, data]);
 
-  const updateView = (text: string) => {
-    setSearch(() => {
-      const filteredData = data.map(section => {
-        const filteredSectionData = section.data.filter(item =>
-          item.name.includes(text),
-        );
+  const onSubscriberSwipedLeft = (id: number) => {
+    setData(currentData => {
+      const filteredData = currentData.map(section => {
+        const filteredSectionData = section.data.filter(item => item.id !== id);
         return {...section, data: filteredSectionData};
       });
       return filteredData.filter(section => section.data.length > 0);
@@ -136,8 +136,7 @@ const AddPeopleScreen = () => {
       searchbar={
         <SearchBar
           placeholder="Search..."
-          //onChangeText={text => updateView(text)} // This'll search immediately
-          onChangeText={setSearchInputValue} // This'll wait 2 sec before search
+          onChangeText={setSearchInputValue}
           value={searchInputValue}
           containerStyle={AddPeopleScreenStyles.searchbarContainerStyle}
           inputContainerStyle={
@@ -163,14 +162,13 @@ const AddPeopleScreen = () => {
       }>
       <SectionList
         sections={search}
-        keyExtractor={(item, index) => (item.id + index) as unknown as string}
+        keyExtractor={(item, index) => `${item.id + index}`}
         renderItem={({item}) => (
           <SubscriberCell
-            styles={subscriberCellStyles}
+            paddingStart={25}
             renderComponentType="checkbox"
             subscriber={item}
-            onPressFollowButton={() => {}}
-            setSubscribers={setData}
+            onSubscriberSwipedLeft={onSubscriberSwipedLeft}
           />
         )}
         renderSectionHeader={({section}) => (

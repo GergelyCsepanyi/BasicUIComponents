@@ -32,6 +32,7 @@ const AddPeopleScreenStyles = StyleSheet.create({
     color: Colors.bluePurple,
     fontWeight: 'bold',
     marginVertical: 10,
+    fontSize: 18,
   },
   searchbarStyle: {
     backgroundColor: Colors.white,
@@ -66,58 +67,9 @@ const AddPeopleScreenStyles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   sectionListStyle: {
+    width: '100%',
     height: '30%',
   },
 });
 
-export const subscriberCellStyles = StyleSheet.create({
-  subscriberCellContainerStyle: {
-    height: 67,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginStart: 22,
-    marginBottom: 10,
-  },
-  touchableOpacityStyle: {
-    flex: 3,
-    height: 29,
-    width: 92,
-    fontSize: 12,
-    borderRadius: 25,
-    backgroundColor: Colors.darkBlue,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  checkboxContainerStyle: {
-    width: '55%',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-  },
-  checkboxStyle: {
-    marginEnd: 6,
-    fontSize: 12,
-    borderRadius: 25,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-  },
-  buttonTextStyle: {fontSize: 15},
-
-  imageStyle: {
-    width: 47,
-    height: 47,
-    borderRadius: 8,
-    marginEnd: 15,
-  },
-
-  subscriberTextsContainer: {
-    justifyContent: 'flex-start',
-  },
-
-  titleTextStyle: {
-    color: Colors.darkerDarkBlue,
-    fontSize: 17,
-    fontWeight: 'bold',
-  },
-  descriptionTextStyle: {color: Colors.bluePurple, fontSize: 12},
-});
 export default AddPeopleScreenStyles;

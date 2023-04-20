@@ -3,8 +3,7 @@ import Colors from '../../theme/Colors';
 
 const FilledButtonStyles = StyleSheet.create({
   touchableOpacityStyle: {
-    width: '100%',
-    height: 50,
+    flex: 1,
     borderRadius: 25,
     backgroundColor: Colors.darkBlue,
     justifyContent: 'center',

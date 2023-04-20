@@ -9,7 +9,6 @@ async function storeData(key: string, value: string) {
 async function storeDataObj(key: string, value: object) {
   try {
     const valueAsString = JSON.stringify(value);
-    //console.log('valueAsString', valueAsString);
     await AsyncStorage.setItem(key, valueAsString);
   } catch (e) {}
 }
@@ -39,4 +38,10 @@ async function clearStorage() {
   } catch (e) {}
 }
 
-export default {getData, getDataObj, storeData, storeDataObj, clearStorage};
+export default {
+  getData,
+  getDataObj,
+  storeData,
+  storeDataObj,
+  clearStorage,
+};

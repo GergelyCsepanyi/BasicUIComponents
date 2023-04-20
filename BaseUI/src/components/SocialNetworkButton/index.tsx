@@ -3,7 +3,7 @@ import {TouchableOpacity, Image} from 'react-native';
 import SocialNetworkButtonStyles from './styles';
 
 interface SocialNetworkButtonProps {
-  image: string;
+  image: any;
 }
 
 class SocialNetworkButton extends React.Component<SocialNetworkButtonProps> {

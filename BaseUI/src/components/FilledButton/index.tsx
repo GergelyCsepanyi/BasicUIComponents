@@ -1,28 +1,36 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import {TouchableOpacity, Text} from 'react-native';
+import FilledButtonStyles from './styles';
 
 interface FilledButtonProps {
   title: string;
   onPress: () => void;
   disabled?: boolean;
-  touchableOpacityStyle: StyleProp<ViewStyle>;
-  textStyle: StyleProp<TextStyle>;
+  textColor?: string;
+  backgroundColor?: string;
 }
 
 class FilledButton extends React.Component<FilledButtonProps, {}> {
   render(): React.ReactNode {
     return (
       <TouchableOpacity
-        style={[this.props.touchableOpacityStyle]}
+        style={[
+          FilledButtonStyles.touchableOpacityStyle,
+          this.props.backgroundColor
+            ? {
+                backgroundColor: this.props.backgroundColor,
+              }
+            : {},
+        ]}
         onPress={this.props.onPress}
         disabled={this.props.disabled}>
-        <Text style={this.props.textStyle}>{this.props.title}</Text>
+        <Text
+          style={[
+            FilledButtonStyles.textStyle,
+            this.props.textColor ? {color: this.props.textColor} : {},
+          ]}>
+          {this.props.title}
+        </Text>
       </TouchableOpacity>
     );
   }

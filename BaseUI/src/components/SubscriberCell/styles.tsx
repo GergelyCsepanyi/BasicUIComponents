@@ -10,15 +10,14 @@ const SubscriberCellStyle = StyleSheet.create({
   },
   touchableOpacityStyle: {
     flex: 2,
-    height: 29,
-    width: 92,
     fontSize: 12,
     borderRadius: 25,
     backgroundColor: Colors.darkBlue,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonTextStyle: {fontSize: 15},
+
+  filledButtonContainer: {width: '25%', height: 30},
 
   imageStyle: {
     width: 47,

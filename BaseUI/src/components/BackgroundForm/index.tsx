@@ -32,7 +32,9 @@ class BackgroundForm extends React.Component<BackgroundFormProps, {}> {
         style={this.props.imageBackgroundStyle}>
         <View style={this.props.profileHeaderContainerStyle}>
           {/* !this.props.editMode not working here because it can be undefined*/}
-          {this.props.editMode === false && <View style={{width: 28}} />}
+          {this.props.editMode === false && (
+            <View style={BackgroundFormStyles.placeholderForEditButton} />
+          )}
           {this.props?.mainTitleElement}
           {this.props?.editButtonElement &&
             !this.props?.editMode &&

@@ -9,31 +9,21 @@ const ProfileScreenStyles = StyleSheet.create({
 
   profileTextStyle: {
     flex: 10,
-    //width: '100%',
     color: Colors.white,
     fontSize: 20,
     fontWeight: 'bold',
     alignSelf: 'center',
-    //flexDirection: 'row',
-    //justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    // borderWidth: 1,
-    //borderColor: 'red',
   },
   backgroundImageViewStyle: {
     flex: 1,
     justifyContent: 'flex-start',
     paddingTop: 122,
     height: '50%',
-    // borderColor: 'orange',
-    // borderWidth: 4,
   },
   backgroundFormChildrenContainer: {
-    //flex: 1,
     width: '100%',
-    //height: '50%',
-    //minHeight: '80%',
     backgroundColor: Colors.white,
     borderTopLeftRadius: 20,
     alignItems: 'center',
@@ -42,8 +32,6 @@ const ProfileScreenStyles = StyleSheet.create({
     paddingVertical: 30,
     marginTop: 10,
     justifyContent: 'flex-end',
-    // borderColor: 'purple',
-    // borderWidth: 4,
   },
 
   buttonContainerStyle: {
@@ -57,17 +45,12 @@ const ProfileScreenStyles = StyleSheet.create({
     marginBottom: 40,
   },
 
-  touchableOpacityStyle: {
-    //flex: 1,
-    height: 45,
+  textButtonContainer: {justifyContent: 'center', paddingEnd: 5},
+
+  filledButtonContainer: {
+    height: 50,
     width: '90%',
-    borderRadius: 25,
-    backgroundColor: Colors.darkBlue,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textStyle: {
-    fontSize: 15,
+    marginBottom: 20,
   },
 });
 
