@@ -6,8 +6,8 @@ import AddPeopleScreen from './src/screens/AddPeopleScreen';
 
 class App extends React.Component {
   render(): React.ReactNode {
-    // return <LoginScreen />;
-    return <ProfileScreen />;
+    return <LoginScreen />;
+    // return <ProfileScreen />;
     // return <SubscribersScreen />;
     // return <AddPeopleScreen />;
   }

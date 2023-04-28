@@ -16,11 +16,17 @@ class FilledButton extends React.Component<FilledButtonProps, {}> {
       <TouchableOpacity
         style={[
           styles.touchableOpacityStyle,
-          {backgroundColor: this.props.backgroundColor},
+          this.props.backgroundColor
+            ? {backgroundColor: this.props.backgroundColor}
+            : {},
         ]}
         onPress={this.props.onPress}
         disabled={this.props.disabled}>
-        <Text style={[styles.textStyle, {color: this.props.textColor}]}>
+        <Text
+          style={[
+            styles.textStyle,
+            this.props.textColor ? {color: this.props.textColor} : {},
+          ]}>
           {this.props.title}
         </Text>
       </TouchableOpacity>
