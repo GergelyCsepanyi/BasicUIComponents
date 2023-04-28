@@ -4,7 +4,7 @@ import BackgroundForm from '../../components/BackgroundForm';
 import CredentialTextInput from '../../components/CredentialTextInput';
 import FilledButton from '../../components/FilledButton';
 import ProfileImage from '../../components/ProfileImage';
-import ProfileScreenStyles from './styles';
+import styles from './styles';
 import * as ImagePicker from 'react-native-image-picker';
 import SocialSection from '../../components/SocialSection';
 import {Stack} from 'react-native-spacing-system';
@@ -166,7 +166,7 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
 
   editButtonElement = () => {
     return (
-      <View style={ProfileScreenStyles.textButtonContainer}>
+      <View style={styles.textButtonContainer}>
         <TextButton
           color={Colors.white}
           text={'Edit'}
@@ -180,8 +180,8 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        style={ProfileScreenStyles.buttonContainerStyle}>
-        <View style={ProfileScreenStyles.filledButtonContainer}>
+        style={styles.buttonContainerStyle}>
+        <View style={styles.filledButtonContainer}>
           <FilledButton
             title={this.state.editMode ? 'Update profile' : 'Show state'}
             onPress={() =>
@@ -201,14 +201,12 @@ class ProfileScreen extends React.Component<{}, ProfileScreenState> {
         <BackgroundForm
           editMode={this.state.editMode}
           mainTitleElement={
-            <Text style={ProfileScreenStyles.profileTextStyle}>My profile</Text>
+            <Text style={styles.profileTextStyle}>My profile</Text>
           }
-          profileHeaderContainerStyle={
-            ProfileScreenStyles.profileHeaderContainer
-          }
-          imageBackgroundStyle={ProfileScreenStyles.backgroundImageViewStyle}
+          profileHeaderContainerStyle={styles.profileHeaderContainer}
+          imageBackgroundStyle={styles.backgroundImageViewStyle}
           backgroundFormChildrenContainerStyle={
-            ProfileScreenStyles.backgroundFormChildrenContainer
+            styles.backgroundFormChildrenContainer
           }
           updateProfileButtonElement={this.updateProfileButtonElement()}
           editButtonElement={this.editButtonElement()}>

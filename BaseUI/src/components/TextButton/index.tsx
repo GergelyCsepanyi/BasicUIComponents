@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
-import TextButtonStyles from './styles';
+import styles from './styles';
 
 interface TextButtonProps {
   text: string;
@@ -14,11 +14,11 @@ class TextButton extends React.Component<TextButtonProps, {}> {
   render(): React.ReactNode {
     return (
       <TouchableOpacity
-        style={[TextButtonStyles.touchableOpacityStyle]}
+        style={[styles.touchableOpacityStyle]}
         onPress={this.props.onPress}>
         <Text
           style={[
-            TextButtonStyles.textStyle,
+            styles.textStyle,
             this.props.color ? {color: this.props.color} : {},
             this.props.fontSize ? {fontSize: this.props.fontSize} : {},
           ]}>

@@ -1,8 +1,8 @@
 import {StyleSheet} from 'react-native';
 
-const BackgroundFormStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   profileImageContainer: {},
   placeholderForEditButton: {width: 28},
 });
 
-export default BackgroundFormStyles;
+export default styles;

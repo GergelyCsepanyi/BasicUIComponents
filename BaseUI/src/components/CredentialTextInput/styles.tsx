@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../../theme/Colors';
 
-const CredentialTextInputStyle = StyleSheet.create({
+const styles = StyleSheet.create({
   textInputStyle: {
     borderBottomWidth: 1,
     borderColor: Colors.bluePurple,
@@ -11,4 +11,4 @@ const CredentialTextInputStyle = StyleSheet.create({
   },
 });
 
-export default CredentialTextInputStyle;
+export default styles;

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const ProfileImageStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   viewContainerStyle: {
     width: 75,
     marginBottom: 42,
@@ -28,4 +28,4 @@ const ProfileImageStyles = StyleSheet.create({
   },
 });
 
-export default ProfileImageStyles;
+export default styles;

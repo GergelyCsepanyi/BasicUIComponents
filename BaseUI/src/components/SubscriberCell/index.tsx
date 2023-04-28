@@ -4,7 +4,7 @@ import FilledButton from '../FilledButton';
 import {CheckBox} from '@rneui/base';
 import {useSwipe} from '../../hooks/useSwipe';
 import Colors from '../../theme/Colors';
-import SubscriberCellStyle from './styles';
+import styles from './styles';
 import SubscriberItem from '../../interfaces/SubscriberItem';
 
 interface SubscriberCellProps {
@@ -50,28 +50,26 @@ const SubscriberCell = (props: SubscriberCellProps) => {
   return (
     <View
       style={[
-        SubscriberCellStyle.subscriberCellContainerStyle,
+        styles.subscriberCellContainerStyle,
         props.paddingStart ? {paddingStart: props.paddingStart} : {},
       ]}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}>
-      <View style={SubscriberCellStyle.imageStyle}>
+      <View style={styles.imageStyle}>
         <Image
-          style={SubscriberCellStyle.imageStyle}
+          style={styles.imageStyle}
           source={props.subscriber.image ?? {}}
         />
       </View>
-      <View style={SubscriberCellStyle.subscriberTextsContainer}>
-        <Text style={SubscriberCellStyle.titleTextStyle}>
-          {props.subscriber.name}
-        </Text>
-        <Text style={SubscriberCellStyle.descriptionTextStyle}>
+      <View style={styles.subscriberTextsContainer}>
+        <Text style={styles.titleTextStyle}>{props.subscriber.name}</Text>
+        <Text style={styles.descriptionTextStyle}>
           {props.subscriber.description}
         </Text>
       </View>
 
       {props.renderComponentType === 'button' && (
-        <View style={SubscriberCellStyle.filledButtonContainer}>
+        <View style={styles.filledButtonContainer}>
           <FilledButton
             backgroundColor={
               props.subscriber.isFollowing
@@ -88,11 +86,11 @@ const SubscriberCell = (props: SubscriberCellProps) => {
       )}
 
       {props.renderComponentType === 'checkbox' && (
-        <View style={SubscriberCellStyle.checkboxContainerStyle}>
+        <View style={styles.checkboxContainerStyle}>
           <CheckBox
             checked={cbState}
             onTouchEnd={() => setCbState(cbValue => !cbValue)}
-            containerStyle={SubscriberCellStyle.checkboxContainerStyle}
+            containerStyle={styles.checkboxContainerStyle}
           />
         </View>
       )}

@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../../theme/Colors';
 
-const SubscriberScreenStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   flatListStyle: {width: '100%'},
   profileHeaderContainerStyle: {
     flexDirection: 'row',
@@ -30,4 +30,4 @@ const SubscriberScreenStyles = StyleSheet.create({
   },
 });
 
-export default SubscriberScreenStyles;
+export default styles;

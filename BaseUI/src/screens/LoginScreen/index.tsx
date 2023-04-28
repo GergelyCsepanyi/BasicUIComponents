@@ -7,7 +7,7 @@ import SocialNetworkButtonForm from '../../components/SocialNetworkButtonForm';
 import TextButton from '../../components/TextButton';
 import {Stack} from 'react-native-spacing-system';
 import Colors from '../../theme/Colors';
-import LoginScreenStyles from './styles';
+import styles from './styles';
 
 interface LoginScreenState {
   email: string;
@@ -23,9 +23,9 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
   render() {
     return (
       <BackgroundForm
-        imageBackgroundStyle={LoginScreenStyles.backgroundImageViewStyle}
+        imageBackgroundStyle={styles.backgroundImageViewStyle}
         backgroundFormChildrenContainerStyle={
-          LoginScreenStyles.backgroundFormChildrenContainer
+          styles.backgroundFormChildrenContainer
         }>
         <CredentialTextInput
           placeholder="Email"
@@ -42,11 +42,11 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
           onChangeText={password => this.setState({password})}
         />
         <Stack size={30} />
-        <View style={LoginScreenStyles.forgetButtonContainer}>
+        <View style={styles.forgetButtonContainer}>
           <TextButton text="Forget Password?" />
         </View>
         <Stack size={40} />
-        <View style={LoginScreenStyles.filledButtonContainer}>
+        <View style={styles.filledButtonContainer}>
           <FilledButton
             title="Sign In"
             onPress={() =>
@@ -55,13 +55,13 @@ class LoginScreen extends React.Component<{}, LoginScreenState> {
           />
         </View>
         <Stack size={18} />
-        <Text style={LoginScreenStyles.textStyle}>or sign in with</Text>
+        <Text style={styles.textStyle}>or sign in with</Text>
         <Stack size={18} />
 
         <SocialNetworkButtonForm />
         <Stack size={30} />
 
-        <View style={LoginScreenStyles.dontHaveButtonContainer}>
+        <View style={styles.dontHaveButtonContainer}>
           <TextButton color={Colors.bluePurple} text="Don’t have an account?" />
         </View>
         <Stack size={10} />

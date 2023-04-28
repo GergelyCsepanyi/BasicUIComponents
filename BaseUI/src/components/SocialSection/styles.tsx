@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../../theme/Colors';
 
-const SocialSectionStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   containerStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -18,4 +18,4 @@ const SocialSectionStyles = StyleSheet.create({
   },
 });
 
-export default SocialSectionStyles;
+export default styles;

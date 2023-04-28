@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FlatList, ListRenderItemInfo, Text} from 'react-native';
-import SubscriberScreenStyles from './styles';
+import styles from './styles';
 import BackgroundForm from '../../components/BackgroundForm';
 import SubscriberCell from '../../components/SubscriberCell';
 import Images from '../../assets/images/Images';
@@ -49,22 +49,18 @@ const SubscribersScreen = () => {
 
   return (
     <BackgroundForm
-      imageBackgroundStyle={SubscriberScreenStyles.backgroundImageViewStyle}
+      imageBackgroundStyle={styles.backgroundImageViewStyle}
       backgroundFormChildrenContainerStyle={
-        SubscriberScreenStyles.backgroundFormChildrenContainerStyle
+        styles.backgroundFormChildrenContainerStyle
       }
-      profileHeaderContainerStyle={
-        SubscriberScreenStyles.profileHeaderContainerStyle
-      }
+      profileHeaderContainerStyle={styles.profileHeaderContainerStyle}
       mainTitleElement={
-        <Text style={SubscriberScreenStyles.profileHeaderTextStyle}>
-          Subscribers
-        </Text>
+        <Text style={styles.profileHeaderTextStyle}>Subscribers</Text>
       }>
       <FlatList
         data={subscribers}
         renderItem={renderItem}
-        style={SubscriberScreenStyles.flatListStyle}
+        style={styles.flatListStyle}
       />
     </BackgroundForm>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import SocialSectionElement from '../SocialSectionElement';
-import SocialSectionStyles from './styles';
+import styles from './styles';
 import SocialSectionElementStyles from '../SocialSectionElement/styles';
 
 interface SocialSectionProps {
@@ -12,7 +12,7 @@ interface SocialSectionProps {
 class SocialSection extends React.Component<SocialSectionProps> {
   render(): React.ReactNode {
     return (
-      <View style={SocialSectionStyles.containerStyle}>
+      <View style={styles.containerStyle}>
         <SocialSectionElement
           numberText={this.props.followers}
           titleText={'Followers'}
@@ -21,7 +21,7 @@ class SocialSection extends React.Component<SocialSectionProps> {
           titleTextStyle={SocialSectionElementStyles.titleTextStyle}
         />
 
-        <View style={SocialSectionStyles.separatorStyle} />
+        <View style={styles.separatorStyle} />
 
         <SocialSectionElement
           numberText={this.props.following}

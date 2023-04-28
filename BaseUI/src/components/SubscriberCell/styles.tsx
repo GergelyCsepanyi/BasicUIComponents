@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../../theme/Colors';
 
-const SubscriberCellStyle = StyleSheet.create({
+const styles = StyleSheet.create({
   subscriberCellContainerStyle: {
     height: 67,
     flexDirection: 'row',
@@ -42,4 +42,4 @@ const SubscriberCellStyle = StyleSheet.create({
   },
 });
 
-export default SubscriberCellStyle;
+export default styles;

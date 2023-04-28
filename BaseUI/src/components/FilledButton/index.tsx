@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
-import FilledButtonStyles from './styles';
+import styles from './styles';
 
 interface FilledButtonProps {
   title: string;
@@ -15,20 +15,12 @@ class FilledButton extends React.Component<FilledButtonProps, {}> {
     return (
       <TouchableOpacity
         style={[
-          FilledButtonStyles.touchableOpacityStyle,
-          this.props.backgroundColor
-            ? {
-                backgroundColor: this.props.backgroundColor,
-              }
-            : {},
+          styles.touchableOpacityStyle,
+          {backgroundColor: this.props.backgroundColor},
         ]}
         onPress={this.props.onPress}
         disabled={this.props.disabled}>
-        <Text
-          style={[
-            FilledButtonStyles.textStyle,
-            this.props.textColor ? {color: this.props.textColor} : {},
-          ]}>
+        <Text style={[styles.textStyle, {color: this.props.textColor}]}>
           {this.props.title}
         </Text>
       </TouchableOpacity>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, TouchableOpacity, ImageBackground} from 'react-native';
-import ProfileImageStyles from './styles';
+import styles from './styles';
 import Images from '../../assets/images/Images';
 
 interface ProfileImageProps {
@@ -13,21 +13,21 @@ interface ProfileImageProps {
 class ProfileImage extends React.Component<ProfileImageProps, {}> {
   render(): React.ReactNode {
     return (
-      <View style={ProfileImageStyles.viewContainerStyle}>
+      <View style={styles.viewContainerStyle}>
         <TouchableOpacity
           onPress={this.props.onPress}
           disabled={this.props.disabled}
-          style={ProfileImageStyles.touchableOpacityStyle}>
+          style={styles.touchableOpacityStyle}>
           <ImageBackground
             source={this.props.image}
-            imageStyle={ProfileImageStyles.imageStyle}
-            style={ProfileImageStyles.profileImageStyle}
+            imageStyle={styles.imageStyle}
+            style={styles.profileImageStyle}
             resizeMode={'cover'}>
             {this.props.editMode && (
               <View>
                 <Image
                   source={Images.camera}
-                  style={ProfileImageStyles.cameraOnProfileImageStyle}
+                  style={styles.cameraOnProfileImageStyle}
                 />
               </View>
             )}

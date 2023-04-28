@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import backgroundImage from '../../assets/images/backgroundImage';
-import BackgroundFormStyles from './styles';
+import styles from './styles';
 
 interface BackgroundFormProps {
   searchbar?: React.ReactNode;
@@ -31,9 +31,8 @@ class BackgroundForm extends React.Component<BackgroundFormProps, {}> {
         source={backgroundImage}
         style={this.props.imageBackgroundStyle}>
         <View style={this.props.profileHeaderContainerStyle}>
-          {/* !this.props.editMode not working here because it can be undefined*/}
           {this.props.editMode === false && (
-            <View style={BackgroundFormStyles.placeholderForEditButton} />
+            <View style={styles.placeholderForEditButton} />
           )}
           {this.props?.mainTitleElement}
           {this.props?.editButtonElement &&
@@ -43,7 +42,7 @@ class BackgroundForm extends React.Component<BackgroundFormProps, {}> {
         <View style={this.props.searchbarContainerStyle}>
           {this.props?.searchbar}
         </View>
-        <View style={BackgroundFormStyles.profileImageContainer}>
+        <View style={styles.profileImageContainer}>
           {this.props?.profileImageElement}
         </View>
 

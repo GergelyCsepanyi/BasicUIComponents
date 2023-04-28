@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../../theme/Colors';
 
-const LoginScreenStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   textStyle: {
     color: Colors.bluePurple,
   },
@@ -31,4 +31,4 @@ const LoginScreenStyles = StyleSheet.create({
   dontHaveButtonContainer: {alignSelf: 'center'},
 });
 
-export default LoginScreenStyles;
+export default styles;

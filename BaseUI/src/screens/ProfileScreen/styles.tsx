@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../../theme/Colors';
 
-const ProfileScreenStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   profileHeaderContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -54,4 +54,4 @@ const ProfileScreenStyles = StyleSheet.create({
   },
 });
 
-export default ProfileScreenStyles;
+export default styles;

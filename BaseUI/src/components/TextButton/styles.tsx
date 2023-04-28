@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../../theme/Colors';
 
-const TextButtonStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   touchableOpacityStyle: {
     alignSelf: 'flex-start',
   },
@@ -12,4 +12,4 @@ const TextButtonStyles = StyleSheet.create({
   },
 });
 
-export default TextButtonStyles;
+export default styles;
