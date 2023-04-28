@@ -1,0 +1,73 @@
+import React from 'react';
+import {Text, View} from 'react-native';
+import BackgroundForm from '../../components/BackgroundForm';
+import CredentialTextInput from '../../components/CredentialTextInput';
+import FilledButton from '../../components/FilledButton';
+import SocialNetworkButtonForm from '../../components/SocialNetworkButtonForm';
+import TextButton from '../../components/TextButton';
+import {Stack} from 'react-native-spacing-system';
+import Colors from '../../theme/Colors';
+import styles from './styles';
+
+interface LoginScreenState {
+  email: string;
+  password: string;
+}
+
+class LoginScreen extends React.Component<{}, LoginScreenState> {
+  state = {
+    email: '',
+    password: '',
+  };
+
+  render() {
+    return (
+      <BackgroundForm
+        imageBackgroundStyle={styles.backgroundImageViewStyle}
+        backgroundFormChildrenContainerStyle={
+          styles.backgroundFormChildrenContainer
+        }>
+        <CredentialTextInput
+          placeholder="Email"
+          placeholderTextColor={Colors.bluePurple}
+          value={this.state.email}
+          onChangeText={email => this.setState({email})}
+        />
+        <Stack size={15} />
+        <CredentialTextInput
+          placeholder="Password"
+          placeholderTextColor={Colors.bluePurple}
+          secureTextEntry={true}
+          value={this.state.password}
+          onChangeText={password => this.setState({password})}
+        />
+        <Stack size={30} />
+        <View style={styles.forgetButtonContainer}>
+          <TextButton text="Forget Password?" />
+        </View>
+        <Stack size={40} />
+        <View style={styles.filledButtonContainer}>
+          <FilledButton
+            title="Sign In"
+            onPress={() =>
+              console.log("'Sign in' button was pressed", this.state)
+            }
+          />
+        </View>
+        <Stack size={18} />
+        <Text style={styles.textStyle}>or sign in with</Text>
+        <Stack size={18} />
+
+        <SocialNetworkButtonForm />
+        <Stack size={30} />
+
+        <View style={styles.dontHaveButtonContainer}>
+          <TextButton color={Colors.bluePurple} text="Don’t have an account?" />
+        </View>
+        <Stack size={10} />
+      </BackgroundForm>
+    );
+  }
+}
+
+export default LoginScreen;
